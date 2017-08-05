@@ -1,6 +1,10 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var form = require('express-form');
 var logger = require('morgan');
 var redis = require('redis');
+
+var field = form.field;
 
 var client = redis.createClient({
     "url": "redis://h:p652853b2eff65febda93a260c728d5593f13ba6c0db9ead23ac45e6cffa7adf9@ec2-34-231-155-48.compute-1.amazonaws.com:18469"
@@ -17,9 +21,46 @@ app.use(logger('dev'));
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-    client.set('testkey', 'testvalue', redis.print);
-    res.render('pages/index');
+    console.log('getting teams');
+
+    client.get('teams', function(err, reply) {
+        console.log('got teams: ' + reply);
+
+        res.render('pages/index', {
+            teams: reply
+        });
+    });
 });
+
+app.post(
+    '/',
+    form(
+        field("teamName").trim().required(),
+        field("pickName").trim().required()
+    ),
+    function(req, res) {
+        if (!req.form.isValid) {
+            console.log(req.form.errors);
+            res.redirect('/');
+            return;
+        }
+
+        var teams = client.get('teamPicks', function(err, reply) {
+            var teamJson = JSON.parse(reply);
+
+            var teamPicks = teamJson[req.form.teamName];
+
+            teamPicks.push(req.form.pickName);
+
+            teamJson[req.form.teamName] = teamPicks;
+
+            client.set('teamPicks', teamJson, redis.print);
+
+            res.redirect('/');
+        });
+
+    
+})
 
 app.get('/admin', function(req, res) {
     var testValue = '';

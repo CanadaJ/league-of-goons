@@ -7,9 +7,11 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "^4.15.3",
-    "morgan": "^1.8.2",
+    "body-parser": "^1.17.2",
     "ejs": "^2.5.7",
+    "express": "^4.15.3",
+    "express-form": "^0.12.6",
+    "morgan": "^1.8.2",
     "redis": "^2.7.1"
   }
 }
