@@ -28,7 +28,7 @@ app.get('/admin', function(req, res) {
         console.log('redis reply: ' + reply);
         
         res.render('pages/admin', {
-            keyValue: testValue
+            keyValue: reply
         });
 
     });
