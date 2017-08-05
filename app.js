@@ -90,7 +90,7 @@ app.post(
             return;
         }
 
-        client.hset('teams', req.form.teamName, req.form.pickNum);
+        client.hset('teams', req.form.teamName, req.form.pickNum, redis.print);
 
         res.redirect('/admin');
 });
