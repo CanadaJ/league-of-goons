@@ -21,29 +21,22 @@ app.use(bodyParser());
 
 app.set('view engine', 'ejs');
 
+var teams = [];
+
 app.get('/', function (req, res) {
     console.log('getting teams');
 
-    var teams = [];
-
-    client.multi()
-        .keys('*', function (err, replies) {
-            console.log('got ' + replies.length + ' teams');
-
-            replies.forEach(function (reply, idx) {
-                console.log('team ' + idx + ': ' + reply.toString());
-
-                client.get(reply, function (err, data) {
-                    console.log(err);
-                    console.log(data);
-                    teams.push(data);
-                });
-        }).exec(function (err, replies) {
-            res.render('pages/index', {
-                teams: teams
-            });
+    res.render('pages/index', {
+            teams: teams
         });
-    });
+
+    // client.hgetall('teams', function(err, obj) {
+    //     console.log('got obj: ' + obj);
+
+    //     res.render('pages/index', {
+    //         teams: obj
+    //     });
+    // });
 });
 
 app.post(
@@ -106,14 +99,21 @@ app.post(
         console.log('adding to redis: ' + req.form.teamName);
         console.log('adding to redis: ' + req.form.pickNum);
 
-        client.hmset(req.form.teamName, { 
-                pickNum: req.form.pickNum,
-                picks: ''
-            }, function(err, reply){
-            console.log('err: ' + err);
-            console.log('reply: ' + reply);
-            res.redirect('/admin');
-        });
+        var newTeam = new Object();
+
+        newTeam.name = req.form.teamName;
+        newTeam.pickNum = req.form.pickNum;
+
+        teams.push(newTeam);
+
+        // client.hmset(req.form.teamName, { 
+        //         pickNum: req.form.pickNum,
+        //         picks: ''
+        //     }, function(err, reply){
+        //     console.log('err: ' + err);
+        //     console.log('reply: ' + reply);
+        //     res.redirect('/admin');
+        // });
 });
 
 app.listen(process.env.PORT || 3000, function() {
