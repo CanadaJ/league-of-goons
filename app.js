@@ -22,21 +22,14 @@ app.use(bodyParser());
 app.set('view engine', 'ejs');
 
 var teams = [];
+var teamPicks = [];
 
 app.get('/', function (req, res) {
     console.log('getting teams');
 
     res.render('pages/index', {
-            teams: teams
-        });
-
-    // client.hgetall('teams', function(err, obj) {
-    //     console.log('got obj: ' + obj);
-
-    //     res.render('pages/index', {
-    //         teams: obj
-    //     });
-    // });
+        teams: teams
+    });
 });
 
 app.post(
@@ -52,34 +45,49 @@ app.post(
             return;
         }
 
-        var teams = client.get('teamPicks', function(err, reply) {
-            var teamJson = JSON.parse(reply);
+        var teamName = req.form.teamName;
+        var pickName = req.form.pickName;
 
-            var teamPicks = teamJson[req.form.teamName];
-
-            teamPicks.push(req.form.pickName);
-
-            teamJson[req.form.teamName] = teamPicks;
-
-            client.set('teamPicks', teamJson, redis.print);
-
-            res.redirect('/');
+        var team = teamPicks.find(function () {
+            console.log(this);
+            console.log(this.name);
+            return this.name === teamName;
         });
 
-    
+        if (!team) {
+            var newTeamPick = new Object();
+
+            newTeamPick.name = teamName;
+            newTeamPick.picks = [];
+
+            var currentPick = new Object();
+            currentPick.round = 1;
+            currentPick.pick = pickName;
+
+            newTeamPick.picks.push(currentPick);
+
+            teamPicks.push(newTeamPick);
+
+            res.redirect('/');
+            return;
+        }
+
+        var currentPick = new Object();
+        currentPick.round = team.picks.length + 1;
+        currentPick.pick = pickName;
+
+        for (var team in teamPicks) {
+            if (teamPicks[team].name === teamName) {
+                teamPicks[team].picks.push(currentPick);
+            }
+        }
+
+        res.redirect('/');
+        return;
 });
 
 app.get('/admin', function(req, res) {
-    var testValue = '';
-
-    client.get('testkey', function(err, reply) {
-        console.log('redis reply: ' + reply);
-        
-        res.render('pages/admin', {
-            keyValue: reply
-        });
-
-    });
+    res.render('pages/admin')
 });
 
 app.post(
@@ -96,24 +104,18 @@ app.post(
             return;
         }
 
-        console.log('adding to redis: ' + req.form.teamName);
-        console.log('adding to redis: ' + req.form.pickNum);
-
         var newTeam = new Object();
 
         newTeam.name = req.form.teamName;
         newTeam.pickNum = req.form.pickNum;
 
         teams.push(newTeam);
+});
 
-        // client.hmset(req.form.teamName, { 
-        //         pickNum: req.form.pickNum,
-        //         picks: ''
-        //     }, function(err, reply){
-        //     console.log('err: ' + err);
-        //     console.log('reply: ' + reply);
-        //     res.redirect('/admin');
-        // });
+app.post(/admin/delete, function(req, res) {
+    teams = [];
+
+    res.render('pages/admin');
 });
 
 app.listen(process.env.PORT || 3000, function() {
