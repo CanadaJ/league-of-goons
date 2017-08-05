@@ -2,7 +2,10 @@ var express = require('express');
 var logger = require('morgan');
 var redis = require('redis');
 
-var client = redis.createClient();
+var client = redis.createClient({
+    "url": "redis://h:p652853b2eff65febda93a260c728d5593f13ba6c0db9ead23ac45e6cffa7adf9@ec2-34-231-155-48.compute-1.amazonaws.com:18469"
+});
+
 var app = express();
 
 app.use(logger('dev'));
