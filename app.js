@@ -24,16 +24,11 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res) {
     console.log('getting teams');
 
-    // client.hgetall('teams', function(err, obj) {
-    //     console.log('got obj: ' + obj);
-
-    // })
-
-    client.hkeys('teams', function(err, replies) {
-        console.log('got teams: ' + replies);
+    client.hgetall('teams', function(err, obj) {
+        console.log('got obj: ' + obj);
 
         res.render('pages/index', {
-            teams: replies
+            teams: obj
         });
     });
 });
