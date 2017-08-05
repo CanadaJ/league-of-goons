@@ -6,17 +6,19 @@
         <main>
             <div class="jumbotron">
                 <h1>League of Goons</h1>
-                <form method="POST" action="/">
-                    <select name="teamName" class="team-dropdown">
-                        <% teams.forEach(function(team) { %>
-                            <option value="<%= team.value %>">
-                                <%= team.name %>
-                            </option>
-                        <% }); %>
-                    </select>
-                    <input type="text" name="pickName" />
-                    <button type="submit">Submit</button>
-                </form>
+                <% if(teams) { %>
+                    <form method="POST" action="/">
+                        <select name="teamName" class="team-dropdown">
+                            <% teams.forEach(function(team) { %>
+                                <option value="<%= team.value %>">
+                                    <%= team.name %>
+                                </option>
+                            <% }); %>
+                        </select>
+                        <input type="text" name="pickName" />
+                        <button type="submit">Submit</button>
+                    </form>
+                <% } %>
             </div>
         </main>
     </body>
