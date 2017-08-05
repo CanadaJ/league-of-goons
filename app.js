@@ -43,6 +43,7 @@ app.get('/', function (req, res) {
                 teams: teams
             });
         });
+    });
 });
 
 app.post(
