@@ -9,9 +9,9 @@
                 <% if(teams) { %>
                     <form method="POST" action="/">
                         <select name="teamName" class="team-dropdown">
-                            <% teams.forEach(function(team) { %>
-                                <option value="<%= team.pickNum %>">
-                                    <%= team.teamName %>
+                            <% for(var key in teams) { %>
+                                <option value="<%= teams[key] %>">
+                                    <%= key %>
                                 </option>
                             <% }); %>
                         </select>
