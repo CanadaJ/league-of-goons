@@ -21,16 +21,28 @@ app.use(bodyParser());
 
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     console.log('getting teams');
 
-    client.hgetall('teams', function(err, obj) {
-        console.log('got obj: ' + obj);
+    var teams = [];
 
-        res.render('pages/index', {
-            teams: obj
+    client.multi()
+        .keys('*', function (err, replies) {
+            console.log('got ' + replies.length + ' teams');
+
+            replies.forEach(function (reply, idx) {
+                console.log('team ' + idx + ': ' + reply.toString());
+
+                client.get(reply, function (err, data) {
+                    console.log(err);
+                    console.log(data);
+                    teams.push(data);
+                });
+        }).exec(function (err, replies) {
+            res.render('pages/index', {
+                teams: teams
+            });
         });
-    });
 });
 
 app.post(
@@ -93,9 +105,9 @@ app.post(
         console.log('adding to redis: ' + req.form.teamName);
         console.log('adding to redis: ' + req.form.pickNum);
 
-        client.hmset('teams', { 
-                teamName : req.form.teamName,
-                pickNum: req.form.pickNum
+        client.hmset(req.form.teamName, { 
+                pickNum: req.form.pickNum,
+                picks: ''
             }, function(err, reply){
             console.log('err: ' + err);
             console.log('reply: ' + reply);
