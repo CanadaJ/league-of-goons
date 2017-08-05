@@ -7,11 +7,13 @@
             <div class="jumbotron">
                 <h1>League of Goons</h1>
                 <p>Admin</p>
-                <div class="team-controls">
-                    <input type="text" name="teamName" />
-                    <input type="number" name="pickNum" min="1" />
-                    <button class="btn-submit">Add Team</button>
-                </div>
+                <form method="POST" action="/admin">
+                    <div class="team-controls">
+                        <input type="text" name="teamName" />
+                        <input type="number" name="pickNum" min="1" />
+                        <button type="submit" class="btn-submit">Add Team</button>
+                    </div>
+                </form>
             </div>
         </main>
     </body>
