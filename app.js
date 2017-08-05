@@ -84,7 +84,7 @@ app.post(
     function(req, res) {
         if (!req.form.isValid) {
             console.log("form errors: " + req.form.errors);
-            console.log("request.form: " + req.form);
+            console.log("vals: " + req.form.teamName + " : " + req.form.pickNum);
             res.redirect('/admin');
             return;
         }
