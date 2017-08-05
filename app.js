@@ -24,11 +24,13 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res) {
     console.log('getting teams');
 
-    client.get('teams', function(err, reply) {
-        console.log('got teams: ' + reply);
+    client.hkeys('teams', function(err, replies) {
+        console.log('got teams: ' + replies);
+
+        client.quit();
 
         res.render('pages/index', {
-            teams: reply
+            teams: replies
         });
     });
 });
