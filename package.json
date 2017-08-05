@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Fantasy draft board",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "express": "^4.15.3",
     "morgan": "^1.8.2",
