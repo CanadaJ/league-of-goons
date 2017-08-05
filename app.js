@@ -60,7 +60,7 @@ app.post(
         });
 
     
-})
+});
 
 app.get('/admin', function(req, res) {
     var testValue = '';
@@ -73,8 +73,24 @@ app.get('/admin', function(req, res) {
         });
 
     });
+});
 
+app.post(
+    '/admin',
+    form (
+        field('teamName').trim().required(),
+        field('pickNum').trim().required()
+    ),
+    function(req, res) {
+        if (!req.form.isValid) {
+            console.log(req.form.errors);
+            res.redirect('/admin');
+            return;
+        }
 
+        client.hset('teams', req.form.teamName, req.form.pickNum);
+
+        res.redirect('/admin');
 });
 
 app.listen(process.env.PORT || 3000, function() {
