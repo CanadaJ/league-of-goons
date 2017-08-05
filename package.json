@@ -1,0 +1,12 @@
+{
+  "name": "league-of-goons",
+  "version": "0.1.0",
+  "description": "Fantasy draft board",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "ejs": "^2.5.7",
+    "redis": "^2.7.1"
+  }
+}
