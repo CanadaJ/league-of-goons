@@ -83,7 +83,8 @@ app.post(
     ),
     function(req, res) {
         if (!req.form.isValid) {
-            console.log(req.form.errors);
+            console.log("form errors: " + req.form.errors);
+            console.log("request.form: " + req.form);
             res.redirect('/admin');
             return;
         }
