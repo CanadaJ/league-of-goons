@@ -78,8 +78,8 @@ app.get('/admin', function(req, res) {
 app.post(
     '/admin',
     form (
-        form.field('teamName').trim().required(),
-        form.field('pickNum').trim().required()
+        field('teamName').trim().required(),
+        field('pickNum').trim().required()
     ),
     function(req, res) {
         if (!req.form.isValid) {
