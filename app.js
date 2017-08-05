@@ -26,12 +26,14 @@ app.get('/admin', function(req, res) {
 
     client.get('testkey', function(err, reply) {
         console.log('redis reply: ' + reply);
-        testValue = reply;
+        
+        res.render('pages/admin', {
+            keyValue: testValue
+        });
+
     });
 
-    res.render('pages/admin', {
-        keyValue: testValue
-    });
+
 });
 
 app.listen(process.env.PORT || 3000, function() {
