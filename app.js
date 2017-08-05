@@ -90,9 +90,13 @@ app.post(
             return;
         }
 
-        client.hset('teams', req.form.teamName, req.form.pickNum, redis.print);
-
-        res.redirect('/admin');
+        console.log('adding to redis: ' + req.form.teamName);
+        console.log('adding to redis: ' + req.form.pickNum);
+        client.hset('teams', req.form.teamName, req.form.pickNum, function(err, reply){
+            console.log('err: ' + err);
+            console.log('reply: ' + reply);
+            res.redirect('/admin');
+        });
 });
 
 app.listen(process.env.PORT || 3000, function() {
