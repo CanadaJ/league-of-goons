@@ -30,7 +30,7 @@ app.get('/admin', function(req, res) {
     });
 
     res.render('pages/admin', {
-        value: testValue
+        keyValue: testValue
     });
 });
 
