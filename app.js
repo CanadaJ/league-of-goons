@@ -27,8 +27,6 @@ app.get('/', function(req, res) {
     client.hkeys('teams', function(err, replies) {
         console.log('got teams: ' + replies);
 
-        client.quit();
-
         res.render('pages/index', {
             teams: replies
         });
