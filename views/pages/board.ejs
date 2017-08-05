@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/main.css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    </head>
+    <body>
+        <div class="bg-image"></div>
+        <div class="container">
+            <main>
+                <div class="jumbotron">
+                    <h1>League of Goons</h1>
+                    <% if(teamPicks) { %>
+                        <table class="tbl-board" cellspacing="0" cellpadding="0">
+                            <tr class="header-row">
+                                <th>
+                                    Team
+                                </th>
+                                <th>
+                                    Round 1
+                                </th>
+                                <th>
+                                    Round 2
+                                </th>
+                                <th>
+                                    Round 3
+                                </th>
+                                <th>
+                                    Round 4
+                                </th>
+                                <th>
+                                    Round 5
+                                </th>
+                                <th>
+                                    Round 6
+                                </th>
+                                <th>
+                                    Round 7
+                                </th>
+                                <th>
+                                    Round 8
+                                </th>
+                                <th>
+                                    Round 9
+                                </th>
+                                <th>
+                                    Round 10
+                                </th>
+                                <th>
+                                    Round 11
+                                </th>
+                                <th>
+                                    Round 12
+                                </th>
+                                <th>
+                                    Round 13
+                                </th>
+                                <th>
+                                    Round 14
+                                </th>
+                                <th>
+                                    Round 15
+                                </th>
+                                <th>
+                                    Round 16
+                                </th>
+
+                            </tr>
+                            <% for (var team in teamPicks) { %>
+                                <tr>
+                                    <td class="td-team-name">
+                                        <%= teamPicks[team].name %>
+                                    </td>
+                                    <% for (var round in teamPicks[team].picks) { %>
+                                        <td class="td-pick-name">
+                                            <%= teamPicks[team].picks[round].pick %>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                            <% } %>
+                        </table>
+                    <% } %>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

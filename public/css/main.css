@@ -1,0 +1,71 @@
+body, html {
+    height: 100%;
+}
+
+.jumbotron {
+    margin: 0 auto;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.jumbotron h1 {
+    text-align: center;
+}
+
+.bg-image {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    display: block;
+    background: url('https://insidethestar.com/wp-content/uploads/2016/06/o-CENTURYLINK-FIELD-facebook.jpg');
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.container {
+    z-index: 99999;
+    position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.tbl-board {
+    width: 95%;
+    margin: 0 auto;
+    padding: 5px;
+    font-size: 24px;
+    table-layout: fixed;
+}
+
+.tbl-board th {
+    border-bottom: 3px solid black;
+    font-size: 16px;
+}
+
+.td-team-name {
+    text-align: center;
+    padding: 15px;
+    max-width: 200px;
+
+}
+
+.td-pick-name {
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50px;
+}
+

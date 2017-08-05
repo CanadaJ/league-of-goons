@@ -21,6 +21,8 @@ app.use(bodyParser());
 
 app.set('view engine', 'ejs');
 
+app.use(express.static(__dirname + '/public'));
+
 var teams = [];
 var teamPicks = [];
 
@@ -45,42 +47,44 @@ app.post(
             return;
         }
 
-        var teamName = req.form.teamName;
-        var pickName = req.form.pickName;
-
-        var team = teamPicks.find(function () {
-            console.log(this);
-            console.log(this.name);
-            return this.name === teamName;
-        });
-
-        if (!team) {
-            var newTeamPick = new Object();
-
-            newTeamPick.name = teamName;
-            newTeamPick.picks = [];
-
-            var currentPick = new Object();
-            currentPick.round = 1;
-            currentPick.pick = pickName;
-
-            newTeamPick.picks.push(currentPick);
-
-            teamPicks.push(newTeamPick);
-
-            res.redirect('/');
-            return;
-        }
-
-        var currentPick = new Object();
-        currentPick.round = team.picks.length + 1;
-        currentPick.pick = pickName;
+        console.log('teamname ' + req.form.teamName);
 
         for (var team in teamPicks) {
-            if (teamPicks[team].name === teamName) {
-                teamPicks[team].picks.push(currentPick);
+            if (teamPicks[team].name === req.form.teamName) {
+                var currentPick = new Object();
+                currentPick.round = teamPicks[team].picks.length + 1;
+                currentPick.pick = req.form.pickName;
+
+                console.log('added team pick: ' + currentPick.pick);
+
+                for (var team2 in teamPicks) {
+                    if (teamPicks[team2].name === req.form.teamName) {
+                        teamPicks[team2].picks.push(currentPick);
+                    }
+                }
+
+                res.redirect('/');
+                return;
             }
         }
+
+        var newTeamPick = new Object();
+
+        newTeamPick.name = req.form.teamName;
+        newTeamPick.picks = [];
+
+        console.log('req team name: ' + req.form.teamName);
+        console.log('newTeamPick name: ' + newTeamPick.name);
+
+        var currentPick = new Object();
+        currentPick.round = 1;
+        currentPick.pick = req.form.pickName;
+
+        newTeamPick.picks.push(currentPick);
+
+        teamPicks.push(newTeamPick);
+
+        console.log('added team pick: ' + currentPick.pick);
 
         res.redirect('/');
         return;
@@ -110,12 +114,21 @@ app.post(
         newTeam.pickNum = req.form.pickNum;
 
         teams.push(newTeam);
+
+        res.redirect('/admin');
 });
 
-app.post(/admin/delete, function(req, res) {
+app.post('/admin/delete', function(req, res) {
     teams = [];
 
     res.render('pages/admin');
+});
+
+app.get('/board', function(req, res) {
+
+    res.render('pages/board',  {
+        teamPicks: teamPicks
+    });
 });
 
 app.listen(process.env.PORT || 3000, function() {

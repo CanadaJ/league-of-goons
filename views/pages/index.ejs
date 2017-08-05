@@ -10,8 +10,8 @@
                     <form method="POST" action="/">
                         <select name="teamName" class="team-dropdown">
                             <% for(var key in teams) { %>
-                                <option value="<%= teams[key] %>">
-                                    <%= key %>
+                                <option value="<%= teams[key].name %>">
+                                    <%= teams[key].name %>
                                 </option>
                             <% } %>
                         </select>
