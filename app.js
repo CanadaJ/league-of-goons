@@ -17,6 +17,7 @@ client.on('error', function(err) {
 var app = express();
 
 app.use(logger('dev'));
+app.user(bodyParser());
 
 app.set('view engine', 'ejs');
 
