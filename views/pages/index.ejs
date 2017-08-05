@@ -10,8 +10,8 @@
                     <form method="POST" action="/">
                         <select name="teamName" class="team-dropdown">
                             <% teams.forEach(function(team) { %>
-                                <option value="<%= team.value %>">
-                                    <%= team.name %>
+                                <option value="<%= team.pickNum %>">
+                                    <%= team.teamName %>
                                 </option>
                             <% }); %>
                         </select>

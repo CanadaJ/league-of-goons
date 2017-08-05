@@ -24,6 +24,11 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res) {
     console.log('getting teams');
 
+    // client.hgetall('teams', function(err, obj) {
+    //     console.log('got obj: ' + obj);
+
+    // })
+
     client.hkeys('teams', function(err, replies) {
         console.log('got teams: ' + replies);
 
@@ -92,7 +97,11 @@ app.post(
 
         console.log('adding to redis: ' + req.form.teamName);
         console.log('adding to redis: ' + req.form.pickNum);
-        client.hset('teams', req.form.teamName, req.form.pickNum, function(err, reply){
+
+        client.hmset('teams', { 
+                teamName : req.form.teamName,
+                pickNum: req.form.pickNum
+            }, function(err, reply){
             console.log('err: ' + err);
             console.log('reply: ' + reply);
             res.redirect('/admin');
