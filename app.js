@@ -120,6 +120,7 @@ app.post(
 
 app.post('/admin/delete', function(req, res) {
     teams = [];
+    teamPicks = [];
 
     res.render('pages/admin');
 });
