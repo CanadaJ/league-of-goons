@@ -126,7 +126,8 @@ app.get('/board', function(req, res) {
 
 app.get('/pickems', function(req, res) {
 
-    if (cookies.get('username')) {
+    console.log('cookie value: ' + cookies.get('username'));
+    if (cookies.get('username') === 'canadaj') {
 
         var testPicks = {
             id: 1,
