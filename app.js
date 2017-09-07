@@ -165,7 +165,7 @@ app.post(
 
         // check db
         //set cookie
-        cookies.set('username', username, { secure: true });
+        cookies.set('username', req.form.username, { secure: true });
         console.log('set cookie value: ' + cookies.get('username'));
 
         res.redirect('/pickems');
