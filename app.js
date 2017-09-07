@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var form = require('express-form');
 var logger = require('morgan');
-var cookies = require('js-cookies');
+var cookies = require('js-cookie');
 
 var field = form.field;
 
