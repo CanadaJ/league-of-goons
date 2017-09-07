@@ -126,7 +126,7 @@ app.get('/board', function(req, res) {
 
 app.get('/pickems', function(req, res) {
 
-    console.log('cookie value: ' + cookies.get('username'));
+    console.log('got cookie value: ' + cookies.get('username'));
     if (cookies.get('username') === 'canadaj') {
 
         var testPicks = {
@@ -166,6 +166,7 @@ app.post(
         // check db
         //set cookie
         cookies.set('username', 'canadaj');
+        console.log('set cookie value: ' + cookies.get('username'));
 
         res.redirect('/pickems');
 });
