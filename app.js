@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var form = require('express-form');
 var logger = require('morgan');
 var redis = require('redis');
+var cookies = require('js-cookies');
 
 var field = form.field;
 
@@ -130,6 +131,51 @@ app.get('/board', function(req, res) {
     res.render('pages/board',  {
         teamPicks: teamPicks
     });
+});
+
+app.get('/pickems', function(req, res) {
+
+    if (cookies.get('username')) {
+
+        var testPicks = {
+            id: 1,
+            homeTeam: "Seahawks",
+            awayTeam: "49ers"
+        }
+
+        res.redirect('pages/pickems', {
+            userPicks: [testPicks]
+        });
+        return;
+    }
+
+    res.render('pages/login');
+});
+
+app.get('/login', function(req, res) {
+
+    res.render('pages/login');
+});
+
+app.post(
+    '/login',
+    form (
+        field('username').trim().required(),
+        field('password').trim().required()
+    ),
+    function(req, res) {
+        if (!req.form.isValid) {
+            console.log("form errors: " + req.form.errors);
+            console.log("vals: " + req.form.username + " : " + req.form.password);
+            res.redirect('/login');
+            return;
+        }
+
+        // check db
+        //set cookie
+        cookies.set('username', 'canadaj');
+
+        res.redirect('/pickems');
 });
 
 app.listen(process.env.PORT || 3000, function() {
