@@ -2,18 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var form = require('express-form');
 var logger = require('morgan');
-var redis = require('redis');
 var cookies = require('js-cookies');
 
 var field = form.field;
-
-var client = redis.createClient({
-    "url": "redis://h:p652853b2eff65febda93a260c728d5593f13ba6c0db9ead23ac45e6cffa7adf9@ec2-34-231-155-48.compute-1.amazonaws.com:18469"
-});
-
-client.on('error', function(err) {
-    console.log('redis error: ' + err);
-});
 
 var app = express();
 
