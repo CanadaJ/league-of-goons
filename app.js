@@ -165,7 +165,7 @@ app.post(
 
         // check db
         //set cookie
-        cookies.set('username', 'canadaj');
+        cookies.set('username', username, { secure: true });
         console.log('set cookie value: ' + cookies.get('username'));
 
         res.redirect('/pickems');
