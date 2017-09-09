@@ -89,6 +89,10 @@
 .login-controls {
     width: 25%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    flex-direction: column;
 }
 
 .login-control input, .login-control button {
