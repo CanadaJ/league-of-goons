@@ -8,12 +8,11 @@
             function formatDate(date) {
 
                 var hours = date.getHours();
+                var meridian = hours >= 12 ? "PM" : "AM";
 
                 if (hours > 12) hours = hours - 12;
 
-                var meridian = hours >= 12 ? "PM" : "AM";
-
-                return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + hours + ":" + date.getMinutes() + " " + meridian;
+                return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + hours + ":" + date.getMinutes() + " " + meridian;
             } %>
         <div class="bg-image"></div>
         <div class="container">

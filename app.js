@@ -174,8 +174,6 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                 });
         }
 
-        console.log(userPicks);
-        
         res.render('pages/pickems', {
             pickems: userPicks
         });
