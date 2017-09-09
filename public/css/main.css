@@ -132,7 +132,6 @@ body, html {
 
 .pickem-homeaway {
     width: 100%;
-    text-align: center;
     background-color: #A5ACAF;
     padding: 5px 0 5px 0;
 }
@@ -142,6 +141,8 @@ body, html {
     padding: 5px 0 5px 0;
     font-weight: bold;
     font-size: 22px;
+    width: 20%;
+    text-align: center;
 }
 
 .pickem-home, .pickem-away {
@@ -150,9 +151,10 @@ body, html {
     padding: 5px 0 5px 0;
     font-weight: bold;
     font-size: 22px;
+    text-align: center;
 }
 
-.pickem-time, .pickem-timelabel {
+.pickem-time {
     width: 20%;
 }
 
