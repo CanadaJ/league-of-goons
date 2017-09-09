@@ -158,6 +158,7 @@ app.get('/board', function(req, res) {
 app.get('/pickems', isLoggedIn, function(req, res) {
 
     var userPicks = [];
+    var pickCounts = [];
 
     connection.query('CALL pickem_userpicks(?)', [req.user.iduser], function(err, rows) {
         if (err) throw err;
@@ -179,10 +180,13 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                 });
         }
 
+        pickCounts.push({ correct: rows[1].correctpicks, incorrect: rows[1].incorrectpicks });
+
         var user = req.user;
 
         res.render('pages/pickems', {
             pickems: userPicks,
+            pickCounts: pickCounts,
             user: user ? user : null
         });
     });

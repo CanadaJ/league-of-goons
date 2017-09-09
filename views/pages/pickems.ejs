@@ -23,6 +23,10 @@
                 <div class="jumbotron-center-compact">
                     <h1>League of Goons Pick'ems</h1>
                     <div class="pickems-area">
+                    <div class="pickem-counts">
+                        <span class="pickem-counts-correct"><%= pickCounts.correct %></span>
+                        <span class="pickem-counts-incorrect"><%= pickCounts.incorrect %></span>
+                    </div>
                         <% var week = 0; %>
                         <% var idx = 1; %>
                         <% for (var pick in pickems) { %>
