@@ -41,8 +41,8 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.use(require('morgan')('dev'));
-app.use(require('cookie-parser'));
-app.use(require('body-parser'));
+// app.use(require('cookie-parser'));
+// app.use(require('body-parser'));
 // app.use(require('express-session')({ secret: 'fuck goodell' }));
 
 // app.use(passport.initialize());
