@@ -75,7 +75,7 @@
                         url: '/pickems',
                         data: { userid: userid, matchupid: matchupid, teamid: teamid },
                         success: function(result) {
-                            hideLoadingSpinner();
+                            //hideLoadingSpinner();
                             if (result.success) {
                                 pickDiv.addClass('is-selected');
                                 pickDiv.siblings().removeClass('is-selected');
