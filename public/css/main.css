@@ -77,11 +77,11 @@ body, html {
     max-width: 50px;
 }
 
-.pick-select, .team-controls {
+.pick-select, .login-controls {
     text-align: center;
 }
 
-.team-controls input, .team-controls button {
+.login-controls input, .login-controls button {
     padding: 10px;
     font-family: 'Open-Sans', sans-serif !important;
 }
