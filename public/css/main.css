@@ -89,8 +89,8 @@ body, html {
 .pickem, .pickem-alt {
     display: flex;
     align-items: center;
-    height: 50px;
-    border-bottom: 2px solid #e8e8e8;
+    height: 60px;
+    border-bottom: 1px solid #e8e8e8;
 }
 
 .pickem {
@@ -110,15 +110,12 @@ body, html {
 
 .pickem-week {
     width: 100%;
-    padding: 10px;
+    padding: 10px 0 10px 0;
+    margin-top: 15px;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
     border-bottom: 2px solid black;
-}
-
-.pickem {
-    padding: 10px;
 }
 
 .pickem-time {
