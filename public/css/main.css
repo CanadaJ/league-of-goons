@@ -86,9 +86,19 @@
     text-align: center;
 }
 
-.login-controls input, .login-controls button {
+.login-control input, .login-control button {
     padding: 10px;
     font-family: 'Open Sans', sans-serif !important;
+}
+
+.login-control {
+    display: flex;
+    margin: 20px;
+    justify-content: left;
+}
+
+.login-control button {
+    width: 100%;
 }
 
 .pickem, .pickem-alt {
