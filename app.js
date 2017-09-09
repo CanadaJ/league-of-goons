@@ -51,8 +51,6 @@ var teams = [];
 var teamPicks = [];
 
 app.get('/', function (req, res) {
-    console.log('getting teams');
-
     var user = req.user;
 
     res.render('pages/index', {
@@ -69,20 +67,15 @@ app.post(
     ),
     function(req, res) {
         if (!req.form.isValid) {
-            console.log(req.form.errors);
             res.redirect('/');
             return;
         }
-
-        console.log('teamname ' + req.form.teamName);
 
         for (var team in teamPicks) {
             if (teamPicks[team].name === req.form.teamName) {
                 var currentPick = new Object();
                 currentPick.round = teamPicks[team].picks.length + 1;
                 currentPick.pick = req.form.pickName;
-
-                console.log('added team pick: ' + currentPick.pick);
 
                 for (var team2 in teamPicks) {
                     if (teamPicks[team2].name === req.form.teamName) {
@@ -100,9 +93,6 @@ app.post(
         newTeamPick.name = req.form.teamName;
         newTeamPick.picks = [];
 
-        console.log('req team name: ' + req.form.teamName);
-        console.log('newTeamPick name: ' + newTeamPick.name);
-
         var currentPick = new Object();
         currentPick.round = 1;
         currentPick.pick = req.form.pickName;
@@ -110,8 +100,6 @@ app.post(
         newTeamPick.picks.push(currentPick);
 
         teamPicks.push(newTeamPick);
-
-        console.log('added team pick: ' + currentPick.pick);
 
         res.redirect('/');
         return;
@@ -132,8 +120,6 @@ app.post(
     ),
     function(req, res) {
         if (!req.form.isValid) {
-            console.log("form errors: " + req.form.errors);
-            console.log("vals: " + req.form.teamName + " : " + req.form.pickNum);
             res.redirect('/admin');
             return;
         }
@@ -201,8 +187,6 @@ app.get('/pickems', isLoggedIn, function(req, res) {
 });
 
 app.post('/pickems', function(req, res) {
-    console.log(JSON.stringify(req.body));
-
     var pickRequest = JSON.parse(JSON.stringify(req.body));
 
     if (!req.body) {

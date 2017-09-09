@@ -1,7 +1,12 @@
 <div class="header">
-    <% console.log(user, JSON.stringify(user, null, '\t')) %>
+    <div class="header-link">
+        Home
+    </div>
+    <div class="header-link">
+        Pick'ems
+    </div>
     <% if (!user) { %>
-        <div class="header-link">
+        <div class="header-link right">
             <a href="/login">Login</a>
         </div>
     <% } else { %>
