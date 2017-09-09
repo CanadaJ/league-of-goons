@@ -12,21 +12,14 @@ var field = form.field;
 
 passport.use(new LocalStrategy (
     function(username, password, done) {
-        console.log(username);
-        console.log(password);
-
-
-        connection.query(`CALL user_login(${mysql.escape(username)}, ${mysql.escape(password)})`, function(err, rows) {
+        connection.query(`CALL user_login(?, ?)`, [username, password], function(err, rows) {
             if (err) throw err;
 
-            console.log(rows);
             console.log(rows[0]);
+            console.log(rows[0][0]);
 
-            var username = rows[0].name;
-            var userid = rows[0].iduser;
-
-            console.log(username);
-            console.log(userid);
+            var username = rows[0][0].name;
+            var userid = rows[0][0].iduser;
 
             if (username && userid) {
                 return done(null, { username: username, userid: userid });
