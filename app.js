@@ -55,6 +55,9 @@ app.get('/', function (req, res) {
 
     var user = req.user;
 
+    console.log(user[0]);
+    console.log(user.name);
+
     res.render('pages/index', {
         teams: teams,
         user: user ? user[0] : null
