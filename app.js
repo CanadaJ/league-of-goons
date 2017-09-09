@@ -5,6 +5,8 @@ var cookies = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
+var mysql = require('mysql');
+var connection = mysql.createConnection(process.env.JAWSDB_NAVY_URL);
 
 var field = form.field;
 
@@ -36,6 +38,14 @@ passport.deserializeUser(function(user, cb) {
     if (user.id !== 1) return cb('error');
 
     cb(null, { id: 1, username: 'justin', password: 'foo' });
+});
+
+// mysql
+connection.connect();
+connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+    if (err) throw err;
+
+    console.log('mysql: ' + rows[0].solution);
 });
 
 var app = express();
