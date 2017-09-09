@@ -47,7 +47,13 @@
                                 </div>
                             <% } %>
                             <div class="<%= idx % 2 == 1 ? 'pickem' : 'pickem-alt' %> <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %>">
-                                <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
+                                <% if (pickems[pick].winner) { %>
+                                    <div class="pickem-complete <%= pickems[pick].winner === pickems[pick].userpick ? 'is-correct' : 'is-incorrect' %>">
+                                        <%= pickems[pick].winner === pickems[pick].userpick ? 'Correct' : 'Incorrect' %>
+                                    </div>
+                                <% } else { %>
+                                    <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
+                                <% } %>
                                 <div
                                     data-userid="<%= pickems[pick].userid %>"
                                     data-matchupid="<%= pickems[pick].idmatchup %>"

@@ -131,7 +131,7 @@
     cursor: not-allowed;
 }
 
-.pickem-week, .pickem-team, .pickem-time, .pickem-week {
+.pickem-week, .pickem-team, .pickem-time, .pickem-week, .pickem-complete {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,9 +175,21 @@
     text-align: center;
 }
 
-.pickem-time {
+.pickem-time, .pickem-complete {
     width: 20%;
     font-size: 16px;
+}
+
+.pickem-complete.is-correct, .pickem-complete.is-incorrect {
+    font-weight: bold;
+}
+
+.pickem-complete.is-correct {
+    color: #69BE28;
+}
+
+.pickem-complete.is-incorrect {
+    color: #FF0000;
 }
 
 .pickem-team {
@@ -200,11 +212,12 @@
 }
 
 .pickem-team.is-selected.is-loser {
-    background: red;
+    background: #FF0000;
 }
 
 .pickem-team.is-locked:hover {
     cursor: not-allowed;
+    background: rgba(255, 255, 255, 0);
 }
 
 .hidden {
