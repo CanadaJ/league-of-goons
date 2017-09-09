@@ -323,10 +323,11 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
 
   /* header */
 .header {
-    height: 3rem;
+    height: 10rem;
     background-color: rgba(255, 255, 255, 0.5);
     font-family: 'Open Sans', sans-serif;
     display: flex;
+    font-size: 20px;
 }
 
 .header-link {
@@ -338,7 +339,7 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    width: 6rem;
+    width: 8rem;
     height: 100%;
 }
 
@@ -352,7 +353,7 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
     display: flex;
     flex-direction: row;
     width: auto;
-    width: 15rem;
+    width: 16rem;
 }
 
 .header-username, .header-controls  {
@@ -371,6 +372,10 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
 .header-link.right:hover {
     cursor: auto;
     background-color: rgba(255, 255, 255, 0);
+}
+
+.header-controls {
+    width: 100%;
 }
 
 .header-controls a {
