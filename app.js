@@ -120,7 +120,7 @@ app.post(
 app.get('/admin', function(req, res) {
     var user = req.user;
     res.render('pages/admin', {
-        user: user ? { name: user.name } : null}
+        user: user ? { name: user.name } : null
     });
 });
 
