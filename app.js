@@ -22,7 +22,7 @@ passport.use(new LocalStrategy (
             console.log(userid);
 
             if (username && userid) {
-                return done(null, { username: username, userid: userid });
+                return done(null, { username: username, id: userid });
             }
 
             else return done(null);
@@ -35,10 +35,17 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(user, cb) {
-    // pretend im doing db work until i figure that out
-    if (user.id !== 1) return cb('error');
+    connection.query(`select u.iduser, u.name from users u where u.iduser = ?`, [user.id], function(err, rows) {
+        if (err) throw err;
 
-    cb(null, { id: 1, username: 'justin', password: 'foo' });
+        var username = rows[0][0].name;
+        var userid = rows[0][0].iduser;
+
+        console.log(username);
+        console.log(userid);
+
+       cb(err, { username: username, id: userid });
+    });;
 });
 
 // mysql
