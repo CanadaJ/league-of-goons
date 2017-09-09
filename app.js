@@ -13,45 +13,21 @@ var field = form.field;
 passport.use(new LocalStrategy (
     function(username, password, done) {
         connection.query(`CALL user_login(?, ?)`, [username, password], function(err, rows) {
-            if (err) throw err;
+            if (err) return done(err);
 
-            if (!rows[0][0]) return done(null);
-
-            var username = rows[0][0].name;
-            var userid = rows[0][0].iduser;
-
-            console.log(username);
-            console.log(userid);
-
-            if (username && userid) {
-                return done(null, { username: username, id: userid });
-            }
-
-            else return done(null);
+            return done(null, rows[0][0]);
         });
     }
 ));
 
 passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
+    cb(null, user.iduser);
 });
 
 passport.deserializeUser(function(user, cb) {
     console.log(user);
     connection.query(`select u.iduser, u.name from users u where u.iduser = ?`, [user.id], function(err, rows) {
-        if (err) throw err;
-
-        console.log(rows);
-
-        if (!rows[0]) return cb(null, rows[0]);
-
-        var username = rows[0].name;
-        var userid = rows[0].iduser;
-
-        console.log(username);
-        console.log(userid);
-
-       cb(err, { username: username, id: userid });
+        cb(err, rows[0][0]);
     });;
 });
 
