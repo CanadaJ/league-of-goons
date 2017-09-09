@@ -7,6 +7,7 @@ var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql');
 var connection = mysql.createConnection(process.env.JAWSDB_NAVY_URL);
+var favicon = require('serve-favicon');
 
 var field = form.field;
 
@@ -43,6 +44,7 @@ app.use(logger('dev'));
 app.use(cookies());
 app.use(bodyparser());
 app.use(require('express-session')({ secret: 'fuck goodell' }));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 app.use(passport.initialize());
 app.use(passport.session());
