@@ -49,7 +49,7 @@
                             <div class="<%= idx % 2 == 1 ? 'pickem' : 'pickem-alt' %> <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %>">
                                 <% if (pickems[pick].winner) { %>
                                     <div class="pickem-complete <%= pickems[pick].winner === pickems[pick].userpick ? 'is-correct' : 'is-incorrect' %>">
-                                        <%= pickems[pick].winner === pickems[pick].userpick ? 'Correct' : 'Incorrect' %>
+                                        <i class="material-icons"><%= pickems[pick].winner === pickems[pick].userpick ? 'check' : 'close' %></i>
                                     </div>
                                 <% } else { %>
                                     <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
