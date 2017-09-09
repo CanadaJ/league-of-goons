@@ -90,8 +90,7 @@ body, html {
     display: block;
 }
 
-.pickem-week, .pickem-team, .pickem-time, .pickem-week,
-{
+.pickem-week, .pickem-team, .pickem-time, .pickem-week {
     display: inline-block;
 }
 
