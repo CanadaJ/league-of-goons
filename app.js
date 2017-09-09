@@ -25,10 +25,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(user, cb) {
-    console.log(user);
     connection.query(`select u.iduser, u.name from users u where u.iduser = ?`, [user], function(err, rows) {
-        console.log(rows);
-        console.log(rows[0]);
         cb(err, rows[0]);
     });
 });
@@ -160,6 +157,16 @@ app.get('/board', function(req, res) {
 });
 
 app.get('/pickems', isLoggedIn, function(req, res) {
+
+    var userPicks = [];
+
+    connection.query('CALL pickem_userpicks(?)', [req.user.iduser], function(err, rows) {
+        if (err) throw err;
+
+        console.log(rows);
+        console.log(rows[0]);
+    });
+
     res.render('pages/pickems');
 });
 
