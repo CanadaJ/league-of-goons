@@ -12,6 +12,7 @@
 
 .jumbotron-center-compact {
     margin-top: 5%;
+    width: auto;
 }
 
 .jumbotron h1, .jumbotron-center h1, .jumbotron-center-compact h1 {
