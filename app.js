@@ -26,16 +26,16 @@ var field = form.field;
 //     }
 // ));
 
-passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
-});
+// passport.serializeUser(function(user, cb) {
+//     cb(null, user.id);
+// });
 
-passport.deserializeUser(function(user, cb) {
-    // pretend im doing db work until i figure that out
-    if (user.id !== 1) return cb('error');
+// passport.deserializeUser(function(user, cb) {
+//     // pretend im doing db work until i figure that out
+//     if (user.id !== 1) return cb('error');
 
-    cb(null, { id: 1, username: 'justin', password: 'foo' });
-});
+//     cb(null, { id: 1, username: 'justin', password: 'foo' });
+// });
 
 var app = express();
 
