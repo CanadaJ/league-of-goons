@@ -1,7 +1,7 @@
 var express = require('express');
 var form = require('express-form');
 var bodyparser = require('body-parser');
-// var cookies = require('cookie-parser');
+var cookies = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
@@ -45,7 +45,7 @@ app.set('view engine', 'ejs');
 
 
 app.use(logger('dev'));
-// app.use(cookies());
+app.use(cookies());
 app.use(bodyparser());
 app.use(require('express-session')({ secret: 'fuck goodell' }));
 
