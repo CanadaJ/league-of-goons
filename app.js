@@ -193,9 +193,9 @@ app.post('/pickems', function(req, res) {
         if (err) throw err;
 
         if (rows[0] === 0) {
-            res.send(0);
+            res.send({ success: false });
         } else {
-            res.send(1);
+            res.send({ success: true });
         }
     });
 
