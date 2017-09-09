@@ -179,10 +179,7 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                     idpickteam: rows[0][idx].idpickteam
                 });
         }
-
-        console.log(rows[1]);
-
-        pickCounts.push({ correct: rows[1].correctpicks, incorrect: rows[1].incorrectpicks });
+        pickCounts.push({ correct: rows[1][0].correctpicks, incorrect: rows[1][0].incorrectpicks });
 
         var user = req.user;
 
