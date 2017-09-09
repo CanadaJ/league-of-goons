@@ -134,6 +134,7 @@ body, html {
     width: 100%;
     background-color: #A5ACAF;
     padding: 5px 0 5px 0;
+    display: flex;
 }
 
 .pickem-timelabel {
