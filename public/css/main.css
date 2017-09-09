@@ -126,7 +126,7 @@ body, html {
     width: 40%;
 }
 
-.pickem-team .selected {
+.pickem-team .is-selected {
     font-weight: bold;
     color: #FFFFFF;
     background: #69BE28;
