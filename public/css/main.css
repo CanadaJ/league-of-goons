@@ -398,6 +398,11 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
 }
 
 .header-link a, .header-controls-login a, .header-controls-logout a {
-    display: block;
+    display: flex;
     height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: none;
+    color: #69BE28;
 }
