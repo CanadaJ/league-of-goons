@@ -1,6 +1,6 @@
 var express = require('express');
 var form = require('express-form');
-var cookies = require('cookie-parser');
+// var cookies = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
