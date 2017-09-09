@@ -53,9 +53,11 @@ var teamPicks = [];
 app.get('/', function (req, res) {
     console.log('getting teams');
 
+    var user = req.user;
+
     res.render('pages/index', {
         teams: teams,
-        user: { name: req.user.name}
+        user: user ? { name: user.name } : null
     });
 });
 
@@ -116,8 +118,9 @@ app.post(
 });
 
 app.get('/admin', function(req, res) {
+    var user = req.user;
     res.render('pages/admin', {
-        user: { name: req.user.name}
+        user: user ? { name: user.name } : null}
     });
 });
 
@@ -149,16 +152,20 @@ app.post('/admin/delete', function(req, res) {
     teams = [];
     teamPicks = [];
 
+    var user = req.user;
+
     res.render('pages/admin', {
-        user: { name: req.user.name}
+        user: user ? { name: user.name } : null
     });
 });
 
 app.get('/board', function(req, res) {
 
+    var user = req.user;
+
     res.render('pages/board',  {
         teamPicks: teamPicks,
-        user: { name: req.user.name}
+        user: user ? { name: user.name } : null
     });
 });
 
@@ -184,9 +191,11 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                 });
         }
 
+        var user = req.user;
+
         res.render('pages/pickems', {
             pickems: userPicks,
-            user: { name: req.user.name}
+            user: user ? { name: user.name } : null
         });
     });
 });
