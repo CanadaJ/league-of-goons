@@ -26,7 +26,10 @@
                         <% var idx = 1; %>
                         <% for (var pick in pickems) { %>
                             <% if (week !== pickems[pick].week) { %>
-                                <% week = pickems[pick].week; %>
+                                <% 
+                                    week = pickems[pick].week; 
+                                    idx = 1;
+                                %>
                                 <div class="pickem-week">
                                     WEEK <%= week %>
                                 </div>
