@@ -215,9 +215,14 @@
     background: #FF0000;
 }
 
-.pickem-team.is-locked:hover {
+.pickem-team.is-locked.is-selected.is-winner:hover {
     cursor: not-allowed;
-    background: rgba(255, 255, 255, 0);
+    background: #A4F763;
+}
+
+.pickem-team.is-locked.is-selected.is-loser:hover {
+    cursor: not-allowed;
+    background: #FF0000;
 }
 
 .pick-icon {
