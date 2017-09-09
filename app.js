@@ -55,12 +55,9 @@ app.get('/', function (req, res) {
 
     var user = req.user;
 
-    console.log(user[0]);
-    console.log(user.name);
-
     res.render('pages/index', {
         teams: teams,
-        user: user ? user[0] : null
+        user: user ? user : null
     });
 });
 
@@ -123,7 +120,7 @@ app.post(
 app.get('/admin', function(req, res) {
     var user = req.user;
     res.render('pages/admin', {
-        user: user ? user[0] : null
+        user: user ? user : null
     });
 });
 
@@ -158,7 +155,7 @@ app.post('/admin/delete', function(req, res) {
     var user = req.user;
 
     res.render('pages/admin', {
-        user: user ? user[0] : null
+        user: user ? user : null
     });
 });
 
@@ -168,7 +165,7 @@ app.get('/board', function(req, res) {
 
     res.render('pages/board',  {
         teamPicks: teamPicks,
-        user: user ? user[0] : null
+        user: user ? user : null
     });
 });
 
@@ -198,7 +195,7 @@ app.get('/pickems', isLoggedIn, function(req, res) {
 
         res.render('pages/pickems', {
             pickems: userPicks,
-            user: user ? user[0] : null
+            user: user ? user : null
         });
     });
 });
