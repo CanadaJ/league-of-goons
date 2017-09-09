@@ -82,10 +82,19 @@ body, html {
 }
 
 .pickems-area {
-    max-height: 800px;
+    max-height: 600px;
     overflow-y: scroll;
 }
 
 .pickem {
     display: block;
+}
+
+.pickem-week, .pickem-team, .pickem-time, .pickem-week,
+{
+    display: inline-block;
+}
+
+.hidden {
+    display: none !important;
 }

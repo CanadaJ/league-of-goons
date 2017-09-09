@@ -7,8 +7,8 @@
         <div class="bg-image"></div>
         <div class="container">
             <main>
-                <div class="jumbotron-center-compact">
-                    <h1>League of Goons</h1>
+                <div class="jumbotron-center compact">
+                    <h1>League of Goons Pick'ems</h1>
                     <div class="pickems-area">
                         <% for (var pick in pickems) { %>
                             <div class="pickem">
@@ -17,7 +17,7 @@
                                 <div class="pickem-team"><%= pickems[pick].away %></div>
                                 <div class="pickem-team"><%= pickems[pick].userpick %></div>
                                 <div class="pickem-time"><%= pickems[pick].gametime %></div>
-                                <div class="pickem-week"><%= pickems[pick].idmatchup %></div>
+                                <div class="pickem-week hidden"><%= pickems[pick].idmatchup %></div>
                             </div>
                         <% } %>
                     </div>
