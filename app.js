@@ -54,7 +54,8 @@ app.get('/', function (req, res) {
     console.log('getting teams');
 
     res.render('pages/index', {
-        teams: teams
+        teams: teams,
+        user: { name: req.user.name}
     });
 });
 
@@ -115,7 +116,9 @@ app.post(
 });
 
 app.get('/admin', function(req, res) {
-    res.render('pages/admin')
+    res.render('pages/admin', {
+        user: { name: req.user.name}
+    });
 });
 
 app.post(
@@ -146,13 +149,16 @@ app.post('/admin/delete', function(req, res) {
     teams = [];
     teamPicks = [];
 
-    res.render('pages/admin');
+    res.render('pages/admin', {
+        user: { name: req.user.name}
+    });
 });
 
 app.get('/board', function(req, res) {
 
     res.render('pages/board',  {
-        teamPicks: teamPicks
+        teamPicks: teamPicks,
+        user: { name: req.user.name}
     });
 });
 
@@ -179,7 +185,8 @@ app.get('/pickems', isLoggedIn, function(req, res) {
         }
 
         res.render('pages/pickems', {
-            pickems: userPicks
+            pickems: userPicks,
+            user: { name: req.user.name}
         });
     });
 });
@@ -217,7 +224,14 @@ app.post('/pickems', function(req, res) {
 
 app.get('/login', function(req, res) {
 
-    res.render('pages/login');
+    if (req.isAuthenticated()) {
+        res.redirect('/pickems');
+        return;
+    }
+
+    res.render('pages/login', {
+        user: null
+    });
 });
 
 app.post(

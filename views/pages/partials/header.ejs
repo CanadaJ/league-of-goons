@@ -1,1 +1,14 @@
-<div>header</div>
+<div class="header">
+    <% if (!user || (user && !user.isloggedin)) { %>
+        <div class="header-link">
+            <a href="/login">Login</a>
+        </div>
+    <% } else { %>
+        <div class="header-username">
+            Hello, <%= user.name %>
+        </div>
+        <div class="header-link">
+            <a href="/logout">Logout</a>
+        </div>
+    <% } %>
+</div>
