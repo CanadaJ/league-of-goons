@@ -4,6 +4,18 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     </head>
     <body>
+        <script type="text/javascript">
+            function formatDate(date) {
+
+                var hours = date.getHours();
+
+                if (hours > 12) hours = hours - 12;
+
+                var meridian = hours >= 12 ? "PM" : "AM";
+
+                return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + hours + ":" + date.getMinutes() + " " + meridian;
+            }
+        </script>
         <div class="bg-image"></div>
         <div class="container">
             <main>
@@ -13,13 +25,13 @@
                         <% var week = 0; %>
                         <% for (var pick in pickems) { %>
                             <% if (week !== pickems[pick].week) { %>
+                                <% week = pickems[pick].week; %>
                                 <div class="pickem-week">
                                     WEEK <%= week %>
                                 </div>
-                                <% week = pickems[pick].week; %>
                             <% } %>
                             <div class="pickem">
-                                <div class="pickem-time"><%= pickems[pick].gametime %></div>
+                                <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
                                 <div class="pickem-team <%= pickems[pick].userpick === pickems[pick].home ? 'is-selected' : '' %>"><%= pickems[pick].home %></div>
                                 <div class="pickem-team <%= pickems[pick].userpick === pickems[pick].away ? 'is-selected' : '' %>"><%= pickems[pick].away %></div>
                                 <div class="pickem-week hidden"><%= pickems[pick].idmatchup %></div>
