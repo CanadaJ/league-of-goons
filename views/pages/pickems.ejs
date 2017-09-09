@@ -51,6 +51,10 @@
                 console.log('loading');
             }
 
+            function hideLoadingSpinner() {
+                console.log('done loading');
+            }
+
             $(function() {
                 $('.pickem-team').click(function() {
                     console.log($(this));
@@ -70,7 +74,11 @@
                         url: '/pickems',
                         data: { userid: userid, matchupid: matchupid, teamid: teamid },
                         success: function(result) {
-                            console.log(result);
+                            hideLoadingSpinner();
+                            if (result.success) {
+                                $(this).addClass('is-selected');
+                                $(this).siblings().removeClass('is-selected');
+                            }
                         }
                     });
                 });
