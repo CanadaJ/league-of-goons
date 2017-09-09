@@ -7,7 +7,7 @@
     </div>
     <% if (!user) { %>
         <div class="header-link right">
-            <div class="header-controls">
+            <div class="header-controls-login">
                 <a href="/logout">Login</a>
             </div> 
         </div>
@@ -16,7 +16,7 @@
             <div class="header-username">
                 Hello, <%= user.name %>
             </div>
-            <div class="header-controls">
+            <div class="header-controls-logout">
                 <a href="/logout">Logout</a>
             </div>        
         </div>
