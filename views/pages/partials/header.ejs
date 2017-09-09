@@ -10,10 +10,8 @@
             <a href="/login">Login</a>
         </div>
     <% } else { %>
-        <div class="header-username">
-            Hello, <%= user.name %>
-        </div>
         <div class="header-link right">
+            Hello, <%= user.name %>
             <a href="/logout">Logout</a>
         </div>
     <% } %>

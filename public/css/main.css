@@ -341,11 +341,5 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
 
 .header-link.right {
     float: right;
-}
-
-.header-username {
-    display: flex;
-    align-self: center;
-    padding: 10px;
-    text-align: center;
+    margin-left: auto;
 }
