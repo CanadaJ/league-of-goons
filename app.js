@@ -15,6 +15,8 @@ passport.use(new LocalStrategy (
         connection.query(`CALL user_login(?, ?)`, [username, password], function(err, rows) {
             if (err) throw err;
 
+            if (!rows[0][0]) return done(null);
+
             var username = rows[0][0].name;
             var userid = rows[0][0].iduser;
 
