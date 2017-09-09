@@ -43,10 +43,10 @@ passport.deserializeUser(function(user, cb) {
 
         console.log(rows);
 
-        if (!rows[0][0]) return done(null);
+        if (!rows[0]) return done(null);
 
-        var username = rows[0][0].name;
-        var userid = rows[0][0].iduser;
+        var username = rows[0].name;
+        var userid = rows[0].iduser;
 
         console.log(username);
         console.log(userid);
