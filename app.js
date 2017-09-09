@@ -2,8 +2,8 @@ var express = require('express');
 var form = require('express-form');
 // var cookies = require('cookie-parser');
 var logger = require('morgan');
-var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+// var passport = require('passport'),
+//     LocalStrategy = require('passport-local').Strategy;
 
 var field = form.field;
 
@@ -47,8 +47,8 @@ app.use(logger('dev'));
 app.use(require('body-parser'));
 // app.use(require('express-session')({ secret: 'fuck goodell' }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 var teams = [];
 var teamPicks = [];
@@ -170,7 +170,7 @@ app.get('/login', function(req, res) {
 
 app.post(
     '/login',
-    passport.authenticate('local', { failureRedirect: '/login'}),
+    // passport.authenticate('local', { failureRedirect: '/login'}),
     function(req, res) {
         res.render('pages/pickems');
     }
