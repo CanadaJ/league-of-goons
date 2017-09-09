@@ -23,6 +23,7 @@
                     <h1>League of Goons Pick'ems</h1>
                     <div class="pickems-area">
                         <% var week = 0; %>
+                        <% var idx = 1; %>
                         <% for (var pick in pickems) { %>
                             <% if (week !== pickems[pick].week) { %>
                                 <% week = pickems[pick].week; %>
@@ -30,7 +31,7 @@
                                     WEEK <%= week %>
                                 </div>
                             <% } %>
-                            <div class="pickem">
+                            <div class="<%= idx % 2 == 1 ? 'pickem' : 'pickem-alt' %>">
                                 <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
                                 <div class="pickem-team <%= pickems[pick].userpick === pickems[pick].home ? 'is-selected' : '' %>"><%= pickems[pick].home %></div>
                                 <div class="pickem-team <%= pickems[pick].userpick === pickems[pick].away ? 'is-selected' : '' %>"><%= pickems[pick].away %></div>
