@@ -108,6 +108,7 @@ body, html {
 
 .pickem.is-locked, .pickem-alt.is-locked {
     background: rgb(100, 100, 100);
+    cursor: not-allowed;
 }
 
 .pickem-week, .pickem-team, .pickem-time, .pickem-week {
