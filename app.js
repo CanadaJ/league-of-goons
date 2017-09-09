@@ -194,7 +194,20 @@ app.post('/pickems', function(req, res) {
         return;
     }
 
-    connection.query('CALL pickem_insertpick(?, ?, ?)', [pickRequest.idmatchup, pickRequest.iduser, pickRequest.idteam], function(err, rows) {
+    var idMatchup = pickRequest.matchupid;
+    var idUser = pickRequest.userid;
+    var idTeam = pickRequest.teamid;
+
+    console.log(idMatchup);
+    console.log(idUser);
+    console.log(idTeam);
+
+    if (!idmatchup || !iduser || !idteam) {
+        res.send({ success: false });
+        return;
+    }
+
+    connection.query('CALL pickem_insertpick(?, ?, ?)', [idMatchup, idUser, idTeam], function(err, rows) {
         if (err) throw err;
 
         console.log(rows[1]);
