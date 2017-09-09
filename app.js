@@ -41,6 +41,8 @@ passport.deserializeUser(function(user, cb) {
     connection.query(`select u.iduser, u.name from users u where u.iduser = ?`, [user.id], function(err, rows) {
         if (err) throw err;
 
+        console.log(rows);
+
         if (!rows[0][0]) return done(null);
 
         var username = rows[0][0].name;
