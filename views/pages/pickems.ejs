@@ -4,6 +4,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     </head>
     <body>
+        <div class="loading hidden">Loading&#8230;</div>
         <%
             function formatDate(date) {
 
@@ -48,11 +49,11 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript">
             function showLoadingSpinner() {
-                console.log('loading');
+                $('.loading').removeClass('hidden');
             }
 
             function hideLoadingSpinner() {
-                console.log('done loading');
+                $('.loading').addClass('hidden');
             }
 
             $(function() {
