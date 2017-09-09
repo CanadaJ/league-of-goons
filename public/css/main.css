@@ -128,7 +128,6 @@
 }
 
 .pickem.is-locked, .pickem-alt.is-locked {
-    background: rgb(100, 100, 100);
     cursor: not-allowed;
 }
 
@@ -192,26 +191,8 @@
     background: #69BE28;
 }
 
-.pickem-team.is-selected.is-locked {
-    background: #539024;
-}
-
 .pickem-team:hover {
     background: rgb(255, 255, 255);
-}
-
-.pickem-team.is-locked {
-    cursor: not-allowed;
-}
-
-.pickem-team.is-locked:hover {
-    background: rgba(0, 0, 0, 0.0);
-}
-
-.pickem-team.is-locked.is-selected:hover {
-    font-weight: bold;
-    color: #FFFFFF;
-    background: #539024;
 }
 
 .pickem-team.is-selected:hover {

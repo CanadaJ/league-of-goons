@@ -55,8 +55,8 @@
                                     data-teamid="<%= pickems[pick].idawayteam %>"
                                     class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %>
                                     <%= pickems[pick].userpick === pickems[pick].away ? ' is-selected' : '' %>
-                                    <%= pickems[pick].idawayteam === pickems[pick].winner && pickems[pick].winner ? ' is-winner' : '' %> 
-                                    <%= pickems[pick].idawayteam !== pickems[pick].winner && pickems[pick].winner ? ' is-loser' : '' %>
+                                    <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
+                                    <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
                                      ">
                                         <%= pickems[pick].away %>
                                 </div>
@@ -66,8 +66,8 @@
                                     data-teamid="<%= pickems[pick].idhometeam %>"
                                     class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> 
                                     <%= pickems[pick].userpick === pickems[pick].home ? ' is-selected' : '' %>
-                                    <%= pickems[pick].idhometeam === pickems[pick].winner && pickems[pick].winner ? ' is-winner' : '' %> 
-                                    <%= pickems[pick].idhometeam !== pickems[pick].winner && pickems[pick].winner ? ' is-loser' : '' %>
+                                    <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
+                                    <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
                                     ">
                                         <%= pickems[pick].home %>
                                     </div>
