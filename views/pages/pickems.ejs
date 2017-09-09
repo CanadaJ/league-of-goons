@@ -9,22 +9,7 @@
             <main>
                 <div class="jumbotron-center">
                     <h1>League of Goons</h1>
-                    <% if(userPicks) { %>
-                        <div class="pickems-area">
-                            <% for(var key in userPicks) { %>
-                                <div class="pickem">
-                                    <div class="home-team">
-                                        <%= userPicks[key].homeTeam %>
-                                        <input type="radio" name="<%= userPicks[key].id %>" value="home" />
-                                    </div>
-                                    <div class="away-team">
-                                        <%= userPicks[key].awayTeam %>
-                                        <input type="radio" name="<%= userPicks[key].id %>" value="away" />
-                                    </div>
-                                </div>
-                            <% } %>
-                        </div>
-                    <% } %>
+                    Pickems
                 </div>
             </main>
         </div>
