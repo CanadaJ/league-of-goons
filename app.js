@@ -180,7 +180,7 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                 });
         }
 
-        console.log(rows);
+        console.log(rows[1]);
 
         pickCounts.push({ correct: rows[1].correctpicks, incorrect: rows[1].incorrectpicks });
 
