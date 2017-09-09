@@ -215,6 +215,11 @@
     background: #FF0000;
 }
 
+.pickem-team.is-locked.is-winner:hover {
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0);
+}
+
 .pickem-team.is-locked.is-selected.is-winner:hover {
     cursor: not-allowed;
     background: #A4F763;
