@@ -235,6 +235,11 @@ app.post(
     }
 );
 
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/login');
+});
+
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
