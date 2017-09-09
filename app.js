@@ -27,6 +27,9 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(user, cb) {
     console.log(user);
     connection.query(`select u.iduser, u.name from users u where u.iduser = ?`, [user], function(err, rows) {
+        console.log(rows);
+        console.log(rows[0]);
+        console.log(rows[0][0]);
         cb(err, rows[0][0]);
     });
 });
