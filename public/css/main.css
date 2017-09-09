@@ -203,6 +203,10 @@
     background: red;
 }
 
+.pickem-team.is-locked:hover {
+    cursor: not-allowed;
+}
+
 .hidden {
     display: none !important;
 }
