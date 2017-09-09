@@ -2,18 +2,51 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var form = require('express-form');
 var logger = require('morgan');
-var cookies = require('js-cookie');
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
 
 var field = form.field;
+
+passport.use(new LocalStrategy (
+    function(username, password, done) {
+
+        // pretend im doing db work until i figure that out
+        if (username !== 'justin') return done(null, false, { message: 'Incorrect username'});
+        if (password !== 'foo') return done(null, false, { message: 'Incorrect password '});
+
+        return done(null, { id: 1, username: 'justin', password: 'foo' });
+
+        // User.findOne({ username: username }, function(err, user) {
+        //     if (err) return done(err);
+        //     if (!user) return done(null, false);
+        //     if (!user.verifyPassword(password)) return done(null, false);
+
+        //     return done(null, user);
+        // });
+    }
+));
+
+passport.serializeUser(function(user, cb) {
+    cb(null, user.id);
+});
+
+passport.deserializeUser(function(user, cb) {
+    // pretend im doing db work until i figure that out
+    if (user.id !== 1) return cb('error');
+
+    cb(null, { id: 1, username: 'justin', password: 'foo' });
+});
 
 var app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser());
+app.use(express.static(__dirname + '/public'));
+app.use(express.session({ secret: 'fuck goodell' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set('view engine', 'ejs');
-
-app.use(express.static(__dirname + '/public'));
 
 var teams = [];
 var teamPicks = [];
@@ -125,23 +158,7 @@ app.get('/board', function(req, res) {
 });
 
 app.get('/pickems', function(req, res) {
-
-    console.log('got cookie value: ' + cookies.get('username'));
-    if (cookies.get('username') === 'canadaj') {
-
-        var testPicks = {
-            id: 1,
-            homeTeam: "Seahawks",
-            awayTeam: "49ers"
-        }
-
-        res.redirect('pages/pickems', {
-            userPicks: [testPicks]
-        });
-        return;
-    }
-
-    res.render('pages/login');
+    res.render('pages/pickems');
 });
 
 app.get('/login', function(req, res) {
@@ -151,25 +168,11 @@ app.get('/login', function(req, res) {
 
 app.post(
     '/login',
-    form (
-        field('username').trim().required(),
-        field('password').trim().required()
-    ),
+    passport.authenticate('local', { failureRedirect: '/login'}),
     function(req, res) {
-        if (!req.form.isValid) {
-            console.log("form errors: " + req.form.errors);
-            console.log("vals: " + req.form.username + " : " + req.form.password);
-            res.redirect('/login');
-            return;
-        }
-
-        // check db
-        //set cookie
-        cookies.set('username', req.form.username, { secure: true });
-        console.log('set cookie value: ' + cookies.get('username'));
-
-        res.redirect('/pickems');
-});
+        res.render('pages/pickems');
+    }
+);
 
 app.listen(process.env.PORT || 3000, function() {
     console.log('Listening on port 3000');
