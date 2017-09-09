@@ -173,12 +173,12 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                     userpick: rows[0][idx].userpick 
                 });
         }
-    });
 
-    console.log(userPicks);
-
-    res.render('pages/pickems', {
-        pickems: userPicks
+        console.log(userPicks);
+        
+        res.render('pages/pickems', {
+            pickems: userPicks
+        });
     });
 });
 
@@ -191,7 +191,7 @@ app.post(
     '/login',
     passport.authenticate('local', { failureRedirect: '/login'}),
     function(req, res) {
-        res.render('pages/pickems');
+        res.redirect('/pickems');
     }
 );
 
