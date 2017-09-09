@@ -8,9 +8,11 @@
             function formatDate(date) {
 
                 var hours = date.getHours();
+                var minutes = date.getMinutes();
                 var meridian = hours >= 12 ? "PM" : "AM";
 
                 if (hours > 12) hours = hours - 12;
+                if (minutes.toString().length == 1) minutes = "0" + minutes.toString();
 
                 return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + hours + ":" + date.getMinutes() + " " + meridian;
             } %>
