@@ -7,24 +7,24 @@ var logger = require('morgan');
 
 var field = form.field;
 
-passport.use(new LocalStrategy (
-    function(username, password, done) {
+// passport.use(new LocalStrategy (
+//     function(username, password, done) {
 
-        // pretend im doing db work until i figure that out
-        if (username !== 'justin') return done(null, false, { message: 'Incorrect username'});
-        if (password !== 'foo') return done(null, false, { message: 'Incorrect password '});
+//         // pretend im doing db work until i figure that out
+//         if (username !== 'justin') return done(null, false, { message: 'Incorrect username'});
+//         if (password !== 'foo') return done(null, false, { message: 'Incorrect password '});
 
-        return done(null, { id: 1, username: 'justin', password: 'foo' });
+//         return done(null, { id: 1, username: 'justin', password: 'foo' });
 
-        // User.findOne({ username: username }, function(err, user) {
-        //     if (err) return done(err);
-        //     if (!user) return done(null, false);
-        //     if (!user.verifyPassword(password)) return done(null, false);
+//         // User.findOne({ username: username }, function(err, user) {
+//         //     if (err) return done(err);
+//         //     if (!user) return done(null, false);
+//         //     if (!user.verifyPassword(password)) return done(null, false);
 
-        //     return done(null, user);
-        // });
-    }
-));
+//         //     return done(null, user);
+//         // });
+//     }
+// ));
 
 passport.serializeUser(function(user, cb) {
     cb(null, user.id);
