@@ -2,7 +2,7 @@ body, html {
     height: 100%;
 }
 
-.jumbotron, .jumbotron-center {
+.jumbotron, .jumbotron-center, .jumbotron-center-compact {
     margin: 0 auto;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
@@ -18,7 +18,7 @@ body, html {
     margin-top: 5%;
 }
 
-.jumbotron h1, .jumbotron-center h1 {
+.jumbotron h1, .jumbotron-center h1, .jumbotron-center-compact h1 {
     text-align: center;
 }
 
