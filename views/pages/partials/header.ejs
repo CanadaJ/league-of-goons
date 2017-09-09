@@ -7,14 +7,16 @@
     </div>
     <% if (!user) { %>
         <div class="header-link right">
-            <a href="/login">Login</a>
+            <div class="header-controls">
+                <a href="/logout">Login</a>
+            </div> 
         </div>
     <% } else { %>
         <div class="header-link right">
             <div class="header-username">
                 Hello, <%= user.name %>
             </div>
-            <div class="header-logout">
+            <div class="header-controls">
                 <a href="/logout">Logout</a>
             </div>        
         </div>
