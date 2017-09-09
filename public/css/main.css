@@ -203,18 +203,6 @@
     background: red;
 }
 
-.pickem-team.is-selected.is-loser:hover {
-    background: red;
-}
-
-.pickem-team.is-winner {
-    background: #539024;
-}
-
-.pickem-team.is-winner:hover {
-    background: #539024;
-}
-
 .hidden {
     display: none !important;
 }
