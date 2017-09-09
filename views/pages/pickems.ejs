@@ -10,13 +10,18 @@
                 <div class="jumbotron-center compact">
                     <h1>League of Goons Pick'ems</h1>
                     <div class="pickems-area">
+                        <% var week = 0; %>
                         <% for (var pick in pickems) { %>
+                            <% if (week !== pickems[pick].week) { %>
+                                <div class="pickem-week">
+                                    WEEK <%= week %>
+                                </div>
+                                <% week = pickems[pick].week; %>
+                            <% } %>
                             <div class="pickem">
-                                <div class="pickem-week"><%= pickems[pick].week %></div>
-                                <div class="pickem-team"><%= pickems[pick].home %></div>
-                                <div class="pickem-team"><%= pickems[pick].away %></div>
-                                <div class="pickem-team"><%= pickems[pick].userpick %></div>
                                 <div class="pickem-time"><%= pickems[pick].gametime %></div>
+                                <div class="pickem-team <%= pickems[pick].userpick === pickems[pick].home ? 'is-selected' : '' %>"><%= pickems[pick].home %></div>
+                                <div class="pickem-team <%= pickems[pick].userpick === pickems[pick].away ? 'is-selected' : '' %>"><%= pickems[pick].away %></div>
                                 <div class="pickem-week hidden"><%= pickems[pick].idmatchup %></div>
                             </div>
                         <% } %>
