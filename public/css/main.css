@@ -89,15 +89,9 @@
     font-family: 'Open-Sans', sans-serif !important;
 }
 
-/* .pickems-area {
-    max-height: 800px;
-    overflow-y: scroll;
-} */
-
 .pickem, .pickem-alt {
     display: flex;
     align-items: center;
-    /* height: 75px; */
     font-size: 20px;
     height: 7rem;
 }
@@ -110,8 +104,13 @@
     background: rgba(162, 162, 162, 0.65);
 }
 
-.pickem.is-locked, .pickem-alt.is-locked {
-    background: rgb(100, 100, 100);
+.pickem.is-locked {
+    background: rgba(206, 206, 206, 0.25);
+    cursor: not-allowed;
+}
+
+.pickem-alt.is-locked {
+    background: rgba(162, 162, 162, 0.25);
     cursor: not-allowed;
 }
 
@@ -175,9 +174,9 @@
     background: #69BE28;
 }
 
-.pickem-team.is-selected.is-locked {
+/* .pickem-team.is-selected.is-locked {
     background: #539024;
-}
+} */
 
 .pickem-team:hover {
     background: rgb(255, 255, 255);
@@ -191,11 +190,11 @@
     background: rgba(0, 0, 0, 0.0);
 }
 
-.pickem-team.is-locked.is-selected:hover {
+/* .pickem-team.is-locked.is-selected:hover {
     font-weight: bold;
     color: #FFFFFF;
     background: #539024;
-}
+} */
 
 .pickem-team.is-selected:hover {
     background: #A4F763;
