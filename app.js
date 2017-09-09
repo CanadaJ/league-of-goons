@@ -202,7 +202,7 @@ app.post('/pickems', function(req, res) {
     console.log(idUser);
     console.log(idTeam);
 
-    if (!idmatchup || !iduser || !idteam) {
+    if (!idMatchup || !idUser || !idTeam) {
         res.send({ success: false });
         return;
     }
