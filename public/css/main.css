@@ -105,6 +105,11 @@
     display: flex;
     margin: 5px;
     justify-content: left;
+    width: 100%;
+}
+
+.login-control button {
+    height: 60px;
 }
 
 .pickem, .pickem-alt {
