@@ -68,6 +68,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '/pickems',
+                        data: { userid: userid, matchupid: matchupid, teamid: teamid },
                         success: function(result) {
                             console.log(result);
                         }

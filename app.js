@@ -189,8 +189,15 @@ app.post('/pickems', function(req, res) {
 
     var pickRequest = JSON.parse(JSON.stringify(req.body));
 
+    if (!req.body) {
+        res.send({ success: false });
+        return;
+    }
+
     connection.query('CALL pickem_insertpick(?, ?, ?)', [pickRequest.idmatchup, pickRequest.iduser, pickRequest.idteam], function(err, rows) {
         if (err) throw err;
+
+        console.log(rows);
 
         if (rows[0] === 0) {
             res.send({ success: false });
