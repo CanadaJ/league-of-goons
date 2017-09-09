@@ -106,6 +106,10 @@ body, html {
     background: rgba(162, 162, 162, 0.65);
 }
 
+.pickem.is-locked, .pickem-alt.is-locked {
+    background: rgb(100, 100, 100);
+}
+
 .pickem-week, .pickem-team, .pickem-time, .pickem-week {
     display: flex;
     align-items: center;
@@ -138,6 +142,10 @@ body, html {
     background: #69BE28;
 }
 
+.pickem-team.is-selected.is-locked {
+    background: #539024;
+}
+
 .pickem-team:hover {
     background: rgb(255, 255, 255);
 }
@@ -153,7 +161,7 @@ body, html {
 .pickem-team.is-locked.is-selected:hover {
     font-weight: bold;
     color: #FFFFFF;
-    background: #69BE28;
+    background: #539024;
 }
 
 .pickem-team.is-selected:hover {

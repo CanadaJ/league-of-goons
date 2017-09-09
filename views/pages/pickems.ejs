@@ -35,7 +35,7 @@
                                     WEEK <%= week %>
                                 </div>
                             <% } %>
-                            <div class="<%= idx % 2 == 1 ? 'pickem' : 'pickem-alt' %>">
+                            <div class="<%= idx % 2 == 1 ? 'pickem' : 'pickem-alt' %> <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %>">
                                 <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
                                 <div data-userid="<%= pickems[pick].userid %>" data-matchupid="<%= pickems[pick].idmatchup %>" data-teamid="<%= pickems[pick].idhometeam %>" class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> <%= pickems[pick].userpick === pickems[pick].home ? 'is-selected' : '' %>"><%= pickems[pick].home %></div>
                                 <div data-userid="<%= pickems[pick].userid %>" data-matchupid="<%= pickems[pick].idmatchup %>" data-teamid="<%= pickems[pick].idawayteam %>" class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> <%= pickems[pick].userpick === pickems[pick].away ? 'is-selected' : '' %>"><%= pickems[pick].away %></div>
