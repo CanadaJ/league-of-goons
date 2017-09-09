@@ -86,12 +86,53 @@ body, html {
     overflow-y: scroll;
 }
 
+.pickem, .pickem-alt {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-bottom: 2px solid #e8e8e8;
+}
+
 .pickem {
-    display: block;
+    background: rgba(206, 206, 206, 0.65);
+}
+
+.pickem-alt {
+    background: rgba(162, 162, 162, 0.65);
 }
 
 .pickem-week, .pickem-team, .pickem-time, .pickem-week {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.pickem-week {
+    width: 100%;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.pickem {
+    padding: 10px;
+}
+
+.pickem-time {
+    width: 19%;
+}
+
+.pickem-team {
+    width: 40%;
+}
+
+.pickem-team .selected {
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #69BE28;
 }
 
 .hidden {
