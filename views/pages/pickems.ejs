@@ -9,16 +9,18 @@
             <main>
                 <div class="jumbotron-center">
                     <h1>League of Goons</h1>
-                    <% for (var pick in pickems) { %>
-                        <div class="pickem">
-                            <div class="pickem-week"><%= pickems[pick].week %></div>
-                            <div class="pickem-team"><%= pickems[pick].home %></div>
-                            <div class="pickem-team"><%= pickems[pick].away %></div>
-                            <div class="pickem-team"><%= pickems[pick].userpick %></div>
-                            <div class="pickem-time"><%= pickems[pick].gametime %></div>
-                            <div class="pickem-week"><%= pickems[pick].idmatchup %></div>
-                        </div>
-                    <% } %>
+                    <div class="pickems-area">
+                        <% for (var pick in pickems) { %>
+                            <div class="pickem">
+                                <div class="pickem-week"><%= pickems[pick].week %></div>
+                                <div class="pickem-team"><%= pickems[pick].home %></div>
+                                <div class="pickem-team"><%= pickems[pick].away %></div>
+                                <div class="pickem-team"><%= pickems[pick].userpick %></div>
+                                <div class="pickem-time"><%= pickems[pick].gametime %></div>
+                                <div class="pickem-week"><%= pickems[pick].idmatchup %></div>
+                            </div>
+                        <% } %>
+                    </div>
                 </div>
             </main>
         </div>

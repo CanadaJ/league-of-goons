@@ -76,3 +76,12 @@ body, html {
 .pick-select {
     text-align: center;
 }
+
+.pickems-area {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.pickem {
+    display: block;
+}
