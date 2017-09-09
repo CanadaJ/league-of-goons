@@ -87,15 +87,14 @@ body, html {
 }
 
 .pickems-area {
-    max-height: 600px;
+    max-height: 800px;
     overflow-y: scroll;
 }
 
 .pickem, .pickem-alt {
     display: flex;
     align-items: center;
-    height: 60px;
-    border-bottom: 1px solid #e8e8e8;
+    height: 75px;
     font-size: 20px;
 }
 
