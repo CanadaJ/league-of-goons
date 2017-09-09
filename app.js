@@ -15,11 +15,11 @@ passport.use(new LocalStrategy (
         connection.query(`CALL user_login(?, ?)`, [username, password], function(err, rows) {
             if (err) throw err;
 
-            console.log(rows[0]);
-            console.log(rows[0][0]);
-
             var username = rows[0][0].name;
             var userid = rows[0][0].iduser;
+
+            console.log(username);
+            console.log(userid);
 
             if (username && userid) {
                 return done(null, { username: username, userid: userid });
