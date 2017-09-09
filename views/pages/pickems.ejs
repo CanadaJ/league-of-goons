@@ -75,6 +75,8 @@
                         data: { userid: userid, matchupid: matchupid, teamid: teamid },
                         success: function(result) {
                             hideLoadingSpinner();
+                            console.log(result.success);
+                            console.log($(this));
                             if (result.success) {
                                 $(this).addClass('is-selected');
                                 $(this).siblings().removeClass('is-selected');
