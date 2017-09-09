@@ -1,4 +1,5 @@
 var express = require('express');
+var form = require('express-form');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
