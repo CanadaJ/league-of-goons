@@ -158,7 +158,7 @@ app.get('/board', function(req, res) {
 app.get('/pickems', isLoggedIn, function(req, res) {
 
     var userPicks = [];
-    var pickCounts = [];
+    var pickCounts = {};
 
     connection.query('CALL pickem_userpicks(?)', [req.user.iduser], function(err, rows) {
         if (err) throw err;
@@ -180,14 +180,10 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                 });
         }
 
-        console.log(rows[1][0]);
         var correct = rows[1][0].correctpicks;
         var incorrect = rows[1][0].incorrectpicks;
 
-        console.log(correct);
-        console.log(incorrect);
-
-        pickCounts.push({ correct: correct, incorrect: incorrect });
+        pickCounts = { correct: correct, incorrect: incorrect };
 
         var user = req.user;
 
