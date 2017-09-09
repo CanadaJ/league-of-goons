@@ -43,7 +43,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.use(logger('dev'));
-app.use(cookies());
+// app.use(cookies());
 app.use(require('body-parser'));
 app.use(require('express-session')({ secret: 'fuck goodell' }));
 
