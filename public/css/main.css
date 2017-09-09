@@ -77,8 +77,13 @@ body, html {
     max-width: 50px;
 }
 
-.pick-select {
+.pick-select, .team-controls {
     text-align: center;
+}
+
+.team-controls input, .team-controls button {
+    padding: 10px;
+    font-family: 'Open-Sans', sans-serif !important;
 }
 
 .pickems-area {
