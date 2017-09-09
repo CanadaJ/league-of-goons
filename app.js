@@ -193,6 +193,8 @@ app.get('/pickems', isLoggedIn, function(req, res) {
 
         var user = req.user;
 
+        console.log(user);
+
         res.render('pages/pickems', {
             pickems: userPicks,
             user: user ? { name: user.name } : null
