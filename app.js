@@ -174,7 +174,7 @@ app.get('/board', function(req, res) {
     });
 });
 
-app.get('/pickems', function(req, res) {
+app.get('/pickems', isLoggedIn, function(req, res) {
     res.render('pages/pickems');
 });
 
@@ -190,6 +190,13 @@ app.post(
         res.render('pages/pickems');
     }
 );
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+
+    res.redirect('/login');
+}
 
 app.listen(process.env.PORT || 3000, function() {
     console.log('Listening on port 3000');
