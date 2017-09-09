@@ -124,12 +124,21 @@ body, html {
 
 .pickem-team {
     width: 40%;
+    cursor: pointer;
 }
 
 .pickem-team.is-selected {
     font-weight: bold;
     color: #FFFFFF;
     background: #69BE28;
+}
+
+.pickem-team:hover {
+    background: rgb(255, 255, 255);
+}
+
+.pickem-team.is-selected:hover {
+    background: #A4F763;
 }
 
 .hidden {
