@@ -181,8 +181,13 @@ app.get('/pickems', isLoggedIn, function(req, res) {
         }
 
         console.log(rows[1][0]);
+        var correct = rows[1][0].correctpicks;
+        var incorrect = rows[1][0].incorrectpicks;
 
-        pickCounts.push({ correct: rows[1][0].correctpicks, incorrect: rows[1][0].incorrectpicks });
+        console.log(correct);
+        console.log(incorrect);
+
+        pickCounts.push({ correct: correct, incorrect: incorrect });
 
         var user = req.user;
 
