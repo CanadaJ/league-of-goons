@@ -162,12 +162,24 @@ app.get('/pickems', isLoggedIn, function(req, res) {
 
     connection.query('CALL pickem_userpicks(?)', [req.user.iduser], function(err, rows) {
         if (err) throw err;
-
-        console.log(rows);
-        console.log(rows[0]);
+        for (var idx in rows[0]) {
+            userPicks.push(
+                { 
+                    idmatchup: rows[0][idx].idmatchup,
+                    week: rows[0][idx].week,
+                    home: rows[0][idx].home, 
+                    away: rows[0][idx].away, 
+                    gametime: rows[0][idx].gametime, 
+                    userpick: rows[0][idx].userpick 
+                });
+        }
     });
 
-    res.render('pages/pickems');
+    console.log(userPicks);
+
+    res.render('pages/pickems', {
+        pickems: userPicks
+    });
 });
 
 app.get('/login', function(req, res) {
