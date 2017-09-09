@@ -4,7 +4,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     </head>
     <body>
-        <script type="text/javascript">
+        <%
             function formatDate(date) {
 
                 var hours = date.getHours();
@@ -14,8 +14,7 @@
                 var meridian = hours >= 12 ? "PM" : "AM";
 
                 return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + hours + ":" + date.getMinutes() + " " + meridian;
-            }
-        </script>
+            } %>
         <div class="bg-image"></div>
         <div class="container">
             <main>
