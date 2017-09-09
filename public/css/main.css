@@ -96,6 +96,7 @@ body, html {
     align-items: center;
     height: 60px;
     border-bottom: 1px solid #e8e8e8;
+    font-size: 20px;
 }
 
 .pickem {
@@ -129,11 +130,15 @@ body, html {
 }
 
 .pickem-homeaway {
-
+    width: 100%;
 }
 
 .pickem-home, .pickem-away {
-
+    display: inline-block;
+    width: 40%;
+    padding: 5px 0 5px 0;
+    font-weight: bold;
+    font-size: 22px;
 }
 
 .pickem-away {
