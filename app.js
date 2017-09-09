@@ -12,7 +12,7 @@ var field = form.field;
 
 passport.use(new LocalStrategy (
     function(username, password, done) {
-        conn.query(`CALL user_login(${mysql.escape(username)}, ${mysql.escape(password)}`), function(err, rows) {
+        connection.query(`CALL user_login(${mysql.escape(username)}, ${mysql.escape(password)}`), function(err, rows) {
             if (err) throw err;
 
             var username = rows[0].name;
