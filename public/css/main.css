@@ -324,7 +324,7 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
   /* header */
 .header {
     height: 100px;
-    background-color: rgb(255, 255, 255);
+    background-color: #001433;
     font-family: 'Open Sans', sans-serif;
     display: flex;
     font-size: 22px;
@@ -332,10 +332,11 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
     position: fixed;
     top: 0;
     width: 100%;
+    color: white;
 }
 
 .header-link {
-    border-right: 1px solid #000000;
+    border-right: 1px solid #FFFFFF;
     display: flex;
     align-self: center;
     padding: 0 10px 0 10px;
@@ -394,4 +395,9 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
 
 .header-controls-login:hover, .header-controls-logout:hover {
     background-color: rgba(255, 255, 255, 0.75);
+}
+
+.header-link a, .header-controls-login a, .header-controls-logout a {
+    display: block;
+    height: 100%;
 }
