@@ -19,6 +19,9 @@ passport.use(new LocalStrategy (
         connection.query(`CALL user_login(${mysql.escape(username)}, ${mysql.escape(password)})`, function(err, rows) {
             if (err) throw err;
 
+            console.log(rows);
+            console.log(rows[0]);
+
             var username = rows[0].name;
             var userid = rows[0].iduser;
 
