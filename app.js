@@ -170,7 +170,8 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                     home: rows[0][idx].home, 
                     away: rows[0][idx].away, 
                     gametime: rows[0][idx].gametime, 
-                    userpick: rows[0][idx].userpick 
+                    userpick: rows[0][idx].userpick,
+                    canupdate: rows[0][idx].canupdate,
                 });
         }
 

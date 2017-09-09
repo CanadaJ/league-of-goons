@@ -142,6 +142,20 @@ body, html {
     background: rgb(255, 255, 255);
 }
 
+.pickem-team.is-locked {
+    cursor: not-allowed;
+}
+
+.pickem-team.is-locked:hover {
+    background: rgb(255, 255, 255);
+}
+
+.pickem-team.is-locked.is-selected:hover {
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #69BE28;
+}
+
 .pickem-team.is-selected:hover {
     background: #A4F763;
 }
