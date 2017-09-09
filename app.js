@@ -206,9 +206,7 @@ app.post('/pickems', function(req, res) {
     connection.query('CALL pickem_insertpick(?, ?, ?)', [idMatchup, idUser, idTeam], function(err, rows) {
         if (err) throw err;
 
-        console.log(rows);
-
-        if (rows[0] === 0) {
+        if (!rows || rows.length === 0 || rows.length > 1) {
             res.send({ success: false });
         } else {
             res.send({ success: true });

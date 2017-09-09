@@ -55,8 +55,8 @@
                 $('.pickem-team').click(function() {
                     console.log($(this));
                     var isLocked = $(this).hasClass('is-locked');
-
-                    if (isLocked) return;
+                    var isSelected = $(this).hasClass('is-selected');
+                    if (isLocked || isSelected) return;
 
                     // show a spinner or something
                     showLoadingSpinner();
