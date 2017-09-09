@@ -12,20 +12,21 @@ var field = form.field;
 
 passport.use(new LocalStrategy (
     function(username, password, done) {
+        conn.query(`CALL user_login(${mysql.escape(username)}, ${mysql.escape(password)}`), function(err, rows) {
+            if (err) throw err;
 
-        // pretend im doing db work until i figure that out
-        if (username !== 'justin') return done(null, false, { message: 'Incorrect username'});
-        if (password !== 'foo') return done(null, false, { message: 'Incorrect password '});
+            var username = rows[0].name;
+            var userid = rows[0].iduser;
 
-        return done(null, { id: 1, username: 'justin', password: 'foo' });
+            console.log(username);
+            console.log(userid);
 
-        // User.findOne({ username: username }, function(err, user) {
-        //     if (err) return done(err);
-        //     if (!user) return done(null, false);
-        //     if (!user.verifyPassword(password)) return done(null, false);
+            if (username && userid) {
+                return done(null, { username: username, userid: userid });
+            }
 
-        //     return done(null, user);
-        // });
+            else return done(null);
+        }
     }
 ));
 
@@ -42,11 +43,6 @@ passport.deserializeUser(function(user, cb) {
 
 // mysql
 connection.connect();
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-    if (err) throw err;
-
-    console.log('mysql: ' + rows[0].solution);
-});
 
 var app = express();
 
