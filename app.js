@@ -174,7 +174,8 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                     idhometeam: rows[0][idx].idhometeam,
                     idawayteam: rows[0][idx].idawayteam,
                     userid: req.user.iduser,
-                    winner: rows[0][idx].winner
+                    winner: rows[0][idx].winner,
+                    idpickteam: rows[0][idx].idpickteam
                 });
         }
 
