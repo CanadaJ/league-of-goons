@@ -198,10 +198,6 @@ app.post('/pickems', function(req, res) {
     var idUser = pickRequest.userid;
     var idTeam = pickRequest.teamid;
 
-    console.log(idMatchup);
-    console.log(idUser);
-    console.log(idTeam);
-
     if (!idMatchup || !idUser || !idTeam) {
         res.send({ success: false });
         return;
@@ -210,7 +206,7 @@ app.post('/pickems', function(req, res) {
     connection.query('CALL pickem_insertpick(?, ?, ?)', [idMatchup, idUser, idTeam], function(err, rows) {
         if (err) throw err;
 
-        console.log(rows[1]);
+        console.log(rows);
 
         if (rows[0] === 0) {
             res.send({ success: false });
