@@ -36,9 +36,8 @@
                             <% } %>
                             <div class="<%= idx % 2 == 1 ? 'pickem' : 'pickem-alt' %>">
                                 <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
-                                <div class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> <%= pickems[pick].userpick === pickems[pick].home ? 'is-selected' : '' %>"><%= pickems[pick].home %></div>
-                                <div class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> <%= pickems[pick].userpick === pickems[pick].away ? 'is-selected' : '' %>"><%= pickems[pick].away %></div>
-                                <div class="pickem-week hidden"><%= pickems[pick].idmatchup %></div>
+                                <div data-userid="<%= pickems[pick].userid %>" data-matchupid="<%= pickems[pick].idmatchup %>" data-teamid="<%= pickems[pick].idhometeam %>" class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> <%= pickems[pick].userpick === pickems[pick].home ? 'is-selected' : '' %>"><%= pickems[pick].home %></div>
+                                <div data-userid="<%= pickems[pick].userid %>" data-matchupid="<%= pickems[pick].idmatchup %>" data-teamid="<%= pickems[pick].idawayteam %>" class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> <%= pickems[pick].userpick === pickems[pick].away ? 'is-selected' : '' %>"><%= pickems[pick].away %></div>
                             </div>
                             <% idx++; %>
                         <% } %>
@@ -46,5 +45,35 @@
                 </div>
             </main>
         </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+            function showLoadingSpinner() {
+                console.log('loading');
+            }
+
+            $(function() {
+                $('.pickem-team').click(function() {
+                    console.log($(this));
+                    var isLocked = $(this).hasClass('is-locked');
+
+                    if (isLocked) return;
+
+                    // show a spinner or something
+                    showLoadingSpinner();
+
+                    var userid = $(this).data('userid');
+                    var matchupid = $(this).data('matchup-id');
+                    var teamid = $(this).data('teamid');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/pickems',
+                        success: function(result) {
+                            console.log(result);
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

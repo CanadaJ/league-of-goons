@@ -172,6 +172,9 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                     gametime: rows[0][idx].gametime, 
                     userpick: rows[0][idx].userpick,
                     canupdate: rows[0][idx].canupdate,
+                    idhometeam: rows[0][idx].idhometeam,
+                    idawayteam: rows[0][idx].idawayteam,
+                    userid: req.user.iduser
                 });
         }
 
@@ -179,6 +182,23 @@ app.get('/pickems', isLoggedIn, function(req, res) {
             pickems: userPicks
         });
     });
+});
+
+app.post('/pickems', function(req, res) {
+    console.log(JSON.stringify(req.body));
+
+    var pickRequest = JSON.parse(JSON.stringify(req.body));
+
+    connection.query('CALL pickem_insertpick(?, ?, ?)', [pickRequest.idmatchup, pickRequest.iduser, pickRequest.idteam], function(err, rows) {
+        if (err) throw err;
+
+        if (rows[0] === 0) {
+            res.send(0);
+        } else {
+            res.send(1);
+        }
+    });
+
 });
 
 app.get('/login', function(req, res) {
