@@ -256,7 +256,7 @@ app.get('/leaderboard', function(req, res) {
     var leaderboard = [];
     var lastNumCorrect = -1;
     var rank = 1;
-    var rankDelta = 0;
+    var rankDelta = 1;
 
     connection.query('CALL pickem_pickranks', function(err, rows) {
         if (err) throw err;
