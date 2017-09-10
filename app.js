@@ -265,7 +265,10 @@ app.get('/leaderboard', function(req, res) {
             lastNumCorrect = row.numCorrect;
 
             if (lastNumCorrect === row.numCorrect) rankDelta++;
-            if (lastNumCorrect > row.numCorrect) rank += rankDelta;
+            if (lastNumCorrect > row.numCorrect) {
+                rank += rankDelta;
+                rankDelta = 0;
+            }
 
             leaderboard.push({
                 rank: rank,
