@@ -262,13 +262,18 @@ app.get('/leaderboard', function(req, res) {
         if (err) throw err;
         for (var idx in rows[0]) {
             var row = rows[0][idx];
-            lastNumCorrect = row.numCorrect;
 
-            if (lastNumCorrect === row.numCorrect) rankDelta++;
+
+            if (lastNumCorrect === row.numCorrect) {
+                rankDelta++;
+            }
+        
             if (lastNumCorrect > row.numCorrect) {
                 rank += rankDelta;
                 rankDelta = 0;
             }
+
+            lastNumCorrect = row.numCorrect;
 
             leaderboard.push({
                 rank: rank,
