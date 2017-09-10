@@ -258,7 +258,7 @@ app.get('/leaderboard', function(req, res) {
     var rank = 1;
     var rankDelta = 0;
 
-    connection.query('CALL pickem_userpicks(?)', [req.user.iduser], function(err, rows) {
+    connection.query('CALL pickem_pickranks', function(err, rows) {
         if (err) throw err;
         for (var idx in rows[0]) {
             var row = rows[0][idx];
