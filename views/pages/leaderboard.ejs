@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <head>
+        <%- include partials/styles %>
+        <title>Leaderboard - League of Goons</title>
+    </head>
+    <body>
+        <div class="loading hidden">Loading&#8230;</div>
+        <%
+            function formatDate(date) {
+
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var meridian = hours >= 12 ? "PM" : "AM";
+
+                if (hours > 12) hours = hours - 12;
+                if (minutes.toString().length == 1) minutes = "0" + minutes.toString();
+
+                return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + hours + ":" + minutes + " " + meridian;
+            } %>
+        <div class="bg-image"></div>
+        <div class="container full-page">
+            <main>
+                <% include partials/header %>
+                <div class="jumbotron-center-compact">
+                    <h1>League of Goons Leaderboard</h1>
+                    <div class="leaderboard-area">
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>User</th>
+                                    <th>Correct picks</th>
+                                    <th>Incorrect picks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var idx in leaderboard) { %>
+                                    <tr>
+                                        <td>
+                                            <%= leaderboard[idx].rank %>
+                                        </td>
+                                        <td>
+                                            <%= leaderboard[idx].name %>
+                                        </td>
+                                        <td>
+                                            <%= leaderboard[idx].numCorrect %>
+                                        </td>
+                                        <td>
+                                            <%= leaderboard[idx].numIncorrect %>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

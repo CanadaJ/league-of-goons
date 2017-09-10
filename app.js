@@ -251,6 +251,37 @@ app.get('/logout', function(req, res) {
     res.redirect('/login');
 });
 
+app.get('/leaderboard', function(req, res) {
+
+    var leaderboard = [];
+    var lastNumCorrect = -1;
+    var rank = 1;
+    var rankDelta = 0;
+
+    connection.query('CALL pickem_userpicks(?)', [req.user.iduser], function(err, rows) {
+        if (err) throw err;
+        for (var idx in rows[0]) {
+            var row = rows[0][idx];
+            lastNumCorrect = row.numCorrect;
+
+            if (lastNumCorrect === row.numCorrect) rankDelta++;
+            if (lastNumCorrect > row.numCorrect) rank += rankDelta;
+
+            leaderboard.push({
+                rank: rank,
+                name: row.name,
+                numCorrect: row.numCorrect,
+                numIncorrect: row.numIncorrect
+            });
+        }
+    });
+
+    res.render('pages/leaderboard', {
+        user: req.user,
+        leaderboard: leaderboard
+    });
+});
+
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
