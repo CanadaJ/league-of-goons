@@ -277,11 +277,11 @@ app.get('/leaderboard', function(req, res) {
                 numIncorrect: row.numIncorrect
             });
         }
-    });
 
-    res.render('pages/leaderboard', {
-        user: req.user,
-        leaderboard: leaderboard
+        res.render('pages/leaderboard', {
+            user: req.user,
+            leaderboard: leaderboard
+        });
     });
 });
 
