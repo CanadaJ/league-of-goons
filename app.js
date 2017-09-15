@@ -22,11 +22,11 @@ passport.use(new LocalStrategy (
 ));
 
 passport.serializeUser(function(user, cb) {
-    cb(null, user.iduser);
+    cb(null, user);
 });
 
 passport.deserializeUser(function(user, cb) {
-    connection.query(`select u.iduser, u.name from users u where u.iduser = ?`, [user], function(err, rows) {
+    connection.query(`select u.iduser, u.name, CASE WHEN u.iduser = 1 THEN 1 ELSE 0 END AS isadmin from users u where u.iduser = ?`, [user.iduser], function(err, rows) {
         cb(err, rows[0]);
     });
 });
@@ -107,10 +107,36 @@ app.post(
         return;
 });
 
-app.get('/admin', function(req, res) {
-    var user = req.user;
-    res.render('pages/admin', {
-        user: user ? user : null
+app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
+
+    var matchupWinners = [];
+
+    connection.query('CALL admin_getmatchupwinners', function(err, rows) {
+        if (err) throw err;
+        for (var idx in rows[0]) {
+            matchupWinners.push(
+                { 
+                    idmatchup: rows[0][idx].idmatchup,
+                    week: rows[0][idx].week,
+                    home: rows[0][idx].home, 
+                    away: rows[0][idx].away, 
+                    gametime: rows[0][idx].gametime, 
+                    idhometeam: rows[0][idx].home,
+                    idawayteam: rows[0][idx].away,
+                    userid: req.user.iduser,
+                    winner: rows[0][idx].winner,
+                    hometeam: rows[0][idx].hometeam,
+                    awayteam: rows[0][idx].awayteam,
+                    winnername: rows[0][idx].name
+                });
+        }
+
+
+        var user = req.user;
+        res.render('pages/admin', {
+            user: user ? user : null,
+            matchups: matchupWinners
+        });
     });
 });
 
@@ -197,7 +223,7 @@ app.get('/pickems', isLoggedIn, function(req, res) {
     });
 });
 
-app.post('/pickems', function(req, res) {
+app.post('/pickems', isLoggedIn, function(req, res) {
     var pickRequest = JSON.parse(JSON.stringify(req.body));
 
     if (!req.body) {
@@ -246,7 +272,7 @@ app.post(
     }
 );
 
-app.get('/logout', function(req, res) {
+app.get('/logout', isLoggedIn, function(req, res) {
     req.logout();
     res.redirect('/login');
 });
@@ -289,6 +315,46 @@ app.get('/leaderboard', function(req, res) {
         });
     });
 });
+
+app.post('/setwinner', isLoggedIn, isAdmin, function(req, res) {
+    var pickRequest = JSON.parse(JSON.stringify(req.body));
+
+    if (!req.body) {
+        res.send({ success: false });
+        return;
+    }
+
+    var idMatchup = pickRequest.matchupid;
+    var winner = pickRequest.winner;
+
+    if (!winner || !idMatchup) {
+        res.send({ success: false });
+        return;
+    }
+
+    connection.query('CALL admin_setwinner(?, ?)', [idMatchup, winner], function(err, rows) {
+        if (err) throw err;
+
+        if (!rows || rows.length === 0 || rows.length > 1) {
+            res.send({ success: false });
+        } else {
+            res.send({ success: true });
+        }
+    });
+});
+
+function isAdmin(req, res, next) {
+  var property = 'user';
+  if (req._passport && req._passport.instance) {
+    property = req._passport.instance._userProperty || 'user';
+
+    if(req[property].isadmin === 1)
+        return next();
+
+  }
+
+    res.redirect('/');
+}
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())

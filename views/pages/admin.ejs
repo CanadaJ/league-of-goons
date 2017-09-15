@@ -3,20 +3,115 @@
         <%- include partials/styles %>
         <title>Admin - League of Goons</title>
     </head>
-    <body class="container">
-        <main>
-            <% include partials/header %>
-            <div class="jumbotron">
-                <h1>League of Goons</h1>
-                <p>Admin</p>
-                <form method="POST" action="/admin">
-                    <div class="team-controls">
-                        <input type="text" name="teamName" id="teamName" />
-                        <input type="number" name="pickNum" id="pickNum" min="1" />
-                        <button type="submit" class="btn-submit">Add Team</button>
+    <body>
+        <div class="loading hidden">Loading&#8230;</div>
+        <%
+            function formatDate(date) {
+
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var meridian = hours >= 12 ? "PM" : "AM";
+
+                if (hours > 12) hours = hours - 12;
+                if (minutes.toString().length == 1) minutes = "0" + minutes.toString();
+
+                return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + hours + ":" + minutes + " " + meridian;
+            } %>
+        <div class="bg-image"></div>
+        <div class="container full-page">
+            <main>
+                <% include partials/header %>
+                <div class="jumbotron-center-compact">
+                    <h1>League of Goons Admin</h1>
+                    <div class="pickems-area">
+                        <% var week = 0; %>
+                        <% var mod = 1; %>
+                        <% for (var idx in matchups) { %>
+                            <% if (week !== matchups[idx].week) { %>
+                                <% 
+                                    week = matchups[idx].week; 
+                                    mod = 1;
+                                %>
+                                <div class="pickem-week">
+                                    WEEK <%= week %>
+                                </div>
+                                <div class="pickem-homeaway">
+                                    <div class="pickem-timelabel">
+                                        Time
+                                    </div>
+                                    <div class="pickem-away">
+                                        Away
+                                    </div>
+                                    <div class="pickem-home">
+                                        Home
+                                    </div>
+                                </div>
+                            <% } %>
+                            <div class="<%= mod % 2 == 1 ? 'pickem' : 'pickem-alt' %>">
+                                <div class="pickem-time"><%= formatDate(matchups[idx].gametime) %></div>
+                                <div
+                                    data-userid="<%= matchups[idx].userid %>"
+                                    data-matchupid="<%= matchups[idx].idmatchup %>"
+                                    data-teamid="<%= matchups[idx].idawayteam %>"
+                                    class="pickem-team admin
+                                    <%= (!matchups[idx].idawayteam || matchups[idx].idawayteam === matchups[idx].winner) && matchups[idx].winner ? ' is-winner' : '' %> 
+                                    <%= (!matchups[idx].idawayteam || matchups[idx].idawayteam !== matchups[idx].winner) && matchups[idx].winner ? ' is-loser' : '' %>
+                                     ">
+                                        <%= matchups[idx].awayteam %>
+                                </div>
+                                <div
+                                    data-userid="<%= matchups[idx].userid %>"
+                                    data-matchupid="<%= matchups[idx].idmatchup %>"
+                                    data-teamid="<%= matchups[idx].idhometeam %>"
+                                    class="pickem-team admin
+                                    <%= (!matchups[idx].idhometeam || matchups[idx].idhometeam === matchups[idx].winner) && matchups[idx].winner ? ' is-winner' : '' %> 
+                                    <%= (!matchups[idx].idhometeam || matchups[idx].idhometeam !== matchups[idx].winner) && matchups[idx].winner ? ' is-loser' : '' %>
+                                    ">
+                                        <%= matchups[idx].hometeam %>
+                                    </div>
+                            </div>
+                            <% mod++; %>
+                        <% } %>
                     </div>
-                </form>
-            </div>
-        </main>
+                </div>
+            </main>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+            function showLoadingSpinner() {
+                $('.loading').removeClass('hidden');
+            }
+
+            function hideLoadingSpinner() {
+                $('.loading').addClass('hidden');
+            }
+
+            $(function() {
+                $('.pickem-team').click(function() {
+                    var pickDiv = $(this);
+
+                    // show a spinner or something
+                    showLoadingSpinner();
+
+                    var matchupid = pickDiv.data('matchupid');
+                    var winner = pickDiv.data('teamid');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/setwinner',
+                        data: { matchupid: matchupid, winner: winner },
+                        success: function(result) {
+                            hideLoadingSpinner();
+                            if (result.success) {
+                                pickDiv.addClass('is-winner');
+                                pickDiv.removeClass('is-loser');
+                                pickDiv.siblings().removeClass('is-winner');
+                                pickDiv.siblings().addClass('is-loser');
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

@@ -8,6 +8,11 @@
     <div class="header-link">
         <a href="/leaderboard">Leaderboard</a>
     </div>
+    <% if (user && user.isadmin === 1) { %>
+        <div class="header-link">
+            <a href="/admin">Admin</a>
+        </div>
+    <% } %>
     <% if (!user) { %>
         <div class="header-link right">
             <div class="header-controls-login">
