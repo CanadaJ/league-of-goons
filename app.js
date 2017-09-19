@@ -296,7 +296,7 @@ app.get('/leaderboard', function(req, res) {
         
             if (lastNumCorrect > row.numCorrect) {
                 rank += rankDelta;
-                rankDelta = 0;
+                rankDelta = 1;
             }
 
             lastNumCorrect = row.numCorrect;
