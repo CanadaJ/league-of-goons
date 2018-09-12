@@ -200,7 +200,7 @@
 .pickem-team.is-selected, .pickem-team.admin.is-winner {
     font-weight: bold;
     color: #FFFFFF;
-    background: #69BE28;
+    background: #4286f4;
 }
 
 .pickem-team:hover {
@@ -208,7 +208,7 @@
 }
 
 .pickem-team.is-selected:hover {
-    background: #A4F763;
+    background: #679ef7;
 }
 
 .pickem-team.is-selected.is-loser, .pickem-team.admin.is-loser {
