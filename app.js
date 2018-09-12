@@ -53,59 +53,61 @@ var teams = [];
 var teamPicks = [];
 
 app.get('/', function (req, res) {
-    var user = req.user;
+    // var user = req.user;
 
-    res.render('pages/index', {
-        teams: teams,
-        user: user ? user : null
-    });
+    // res.render('pages/index', {
+    //     teams: teams,
+    //     user: user ? user : null
+    // });
+
+    res.redirect('/pickems');
 });
 
-app.post(
-    '/',
-    form(
-        field("teamName").trim().required(),
-        field("pickName").trim().required()
-    ),
-    function(req, res) {
-        if (!req.form.isValid) {
-            res.redirect('/');
-            return;
-        }
+// app.post(
+//     '/',
+//     form(
+//         field("teamName").trim().required(),
+//         field("pickName").trim().required()
+//     ),
+//     function(req, res) {
+//         if (!req.form.isValid) {
+//             res.redirect('/');
+//             return;
+//         }
 
-        for (var team in teamPicks) {
-            if (teamPicks[team].name === req.form.teamName) {
-                var currentPick = new Object();
-                currentPick.round = teamPicks[team].picks.length + 1;
-                currentPick.pick = req.form.pickName;
+//         for (var team in teamPicks) {
+//             if (teamPicks[team].name === req.form.teamName) {
+//                 var currentPick = new Object();
+//                 currentPick.round = teamPicks[team].picks.length + 1;
+//                 currentPick.pick = req.form.pickName;
 
-                for (var team2 in teamPicks) {
-                    if (teamPicks[team2].name === req.form.teamName) {
-                        teamPicks[team2].picks.push(currentPick);
-                    }
-                }
+//                 for (var team2 in teamPicks) {
+//                     if (teamPicks[team2].name === req.form.teamName) {
+//                         teamPicks[team2].picks.push(currentPick);
+//                     }
+//                 }
 
-                res.redirect('/');
-                return;
-            }
-        }
+//                 res.redirect('/');
+//                 return;
+//             }
+//         }
 
-        var newTeamPick = new Object();
+//         var newTeamPick = new Object();
 
-        newTeamPick.name = req.form.teamName;
-        newTeamPick.picks = [];
+//         newTeamPick.name = req.form.teamName;
+//         newTeamPick.picks = [];
 
-        var currentPick = new Object();
-        currentPick.round = 1;
-        currentPick.pick = req.form.pickName;
+//         var currentPick = new Object();
+//         currentPick.round = 1;
+//         currentPick.pick = req.form.pickName;
 
-        newTeamPick.picks.push(currentPick);
+//         newTeamPick.picks.push(currentPick);
 
-        teamPicks.push(newTeamPick);
+//         teamPicks.push(newTeamPick);
 
-        res.redirect('/');
-        return;
-});
+//         res.redirect('/');
+//         return;
+// });
 
 app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
 
@@ -175,12 +177,14 @@ app.post('/admin/delete', function(req, res) {
 
 app.get('/board', function(req, res) {
 
-    var user = req.user;
+    // var user = req.user;
 
-    res.render('pages/board',  {
-        teamPicks: teamPicks,
-        user: user ? user : null
-    });
+    // res.render('pages/board',  {
+    //     teamPicks: teamPicks,
+    //     user: user ? user : null
+    // });
+
+    res.redirect('/pickems');
 });
 
 app.get('/pickems', isLoggedIn, function(req, res) {
