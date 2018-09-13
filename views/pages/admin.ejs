@@ -53,19 +53,23 @@
                                     data-userid="<%= matchups[idx].userid %>"
                                     data-matchupid="<%= matchups[idx].idmatchup %>"
                                     data-teamid="<%= matchups[idx].idawayteam %>"
+                                    data-istie="<%= matchups[idx].istie %>"
                                     class="pickem-team admin
                                     <%= (!matchups[idx].idawayteam || matchups[idx].idawayteam === matchups[idx].winner) && matchups[idx].winner ? ' is-winner' : '' %> 
                                     <%= (!matchups[idx].idawayteam || matchups[idx].idawayteam !== matchups[idx].winner) && matchups[idx].winner ? ' is-loser' : '' %>
-                                     ">
+                                    <%= matchups[idx].istie ? ' is-winner' : '' %> 
+                                    ">
                                         <%= matchups[idx].awayteam %>
                                 </div>
                                 <div
                                     data-userid="<%= matchups[idx].userid %>"
                                     data-matchupid="<%= matchups[idx].idmatchup %>"
                                     data-teamid="<%= matchups[idx].idhometeam %>"
+                                    data-istie="<%= matchups[idx].istie %>"
                                     class="pickem-team admin
                                     <%= (!matchups[idx].idhometeam || matchups[idx].idhometeam === matchups[idx].winner) && matchups[idx].winner ? ' is-winner' : '' %> 
                                     <%= (!matchups[idx].idhometeam || matchups[idx].idhometeam !== matchups[idx].winner) && matchups[idx].winner ? ' is-loser' : '' %>
+                                    <%= matchups[idx].istie ? ' is-winner' : '' %>
                                     ">
                                         <%= matchups[idx].hometeam %>
                                     </div>
@@ -95,6 +99,14 @@
 
                     var matchupid = pickDiv.data('matchupid');
                     var winner = pickDiv.data('teamid');
+
+                    // if this matchup is a tie dont do anything
+                    var isTie = pickDiv.data('istie');
+
+                    if (isTie) {
+                        hideLoadingSpinner();
+                        return;
+                    }
 
                     $.ajax({
                         type: 'POST',

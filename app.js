@@ -130,7 +130,8 @@ app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
                     winner: rows[0][idx].winner,
                     hometeam: rows[0][idx].hometeam,
                     awayteam: rows[0][idx].awayteam,
-                    winnername: rows[0][idx].name
+                    winnername: rows[0][idx].name,
+                    istie: rows[0][idx].istie
                 });
         }
 
