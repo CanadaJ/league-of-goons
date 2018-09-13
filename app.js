@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var form = require('express-form');
 var bodyparser = require('body-parser');
@@ -208,7 +209,8 @@ app.get('/pickems', isLoggedIn, function(req, res) {
                     idawayteam: rows[0][idx].idawayteam,
                     userid: req.user.iduser,
                     winner: rows[0][idx].winner,
-                    idpickteam: rows[0][idx].idpickteam
+                    idpickteam: rows[0][idx].idpickteam,
+                    istie: rows[0][idx].istie
                 });
         }
 

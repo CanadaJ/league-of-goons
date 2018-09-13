@@ -56,31 +56,55 @@
                                     <div class="pickem-complete <%= pickems[pick].winner === pickems[pick].idpickteam ? 'is-correct' : 'is-incorrect' %>">
                                         <i class="material-icons pick-icon"><%= pickems[pick].winner === pickems[pick].idpickteam ? 'check' : 'close' %></i>
                                     </div>
+                                <% } else if (pickems[pick].istie) { %>
+                                    <div class="pickem-complete is-correct">
+                                        <i class="material-icons pick-icon">check</i>
+                                    </div>
                                 <% } else { %>
                                     <div class="pickem-time"><%= formatDate(pickems[pick].gametime) %></div>
                                 <% } %>
-                                <div
-                                    data-userid="<%= pickems[pick].userid %>"
-                                    data-matchupid="<%= pickems[pick].idmatchup %>"
-                                    data-teamid="<%= pickems[pick].idawayteam %>"
-                                    class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %>
-                                    <%= pickems[pick].userpick === pickems[pick].away ? ' is-selected' : '' %>
-                                    <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
-                                    <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
-                                     ">
-                                        <%= pickems[pick].away %>
-                                </div>
-                                <div
-                                    data-userid="<%= pickems[pick].userid %>"
-                                    data-matchupid="<%= pickems[pick].idmatchup %>"
-                                    data-teamid="<%= pickems[pick].idhometeam %>"
-                                    class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> 
-                                    <%= pickems[pick].userpick === pickems[pick].home ? ' is-selected' : '' %>
-                                    <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
-                                    <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
-                                    ">
-                                        <%= pickems[pick].home %>
+                                <% if (pickems[pick].istie) { %>
+                                    <div
+                                        data-userid="<%= pickems[pick].userid %>"
+                                        data-matchupid="<%= pickems[pick].idmatchup %>"
+                                        data-teamid="<%= pickems[pick].idawayteam %>"
+                                        class="pickem-team is-locked is-selected is-winner">
+                                            <%= pickems[pick].away %>
                                     </div>
+                                <% } else { %>
+                                    <div
+                                        data-userid="<%= pickems[pick].userid %>"
+                                        data-matchupid="<%= pickems[pick].idmatchup %>"
+                                        data-teamid="<%= pickems[pick].idawayteam %>"
+                                        class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %>
+                                        <%= pickems[pick].userpick === pickems[pick].away ? ' is-selected' : '' %>
+                                        <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
+                                        <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
+                                        ">
+                                            <%= pickems[pick].away %>
+                                    </div>
+                                <% } %>
+                                <% if (pickems[pick].istie) { %>
+                                    <div
+                                        data-userid="<%= pickems[pick].userid %>"
+                                        data-matchupid="<%= pickems[pick].idmatchup %>"
+                                        data-teamid="<%= pickems[pick].idawayteam %>"
+                                        class="pickem-team is-locked is-selected is-winner">
+                                            <%= pickems[pick].home %>
+                                    </div>
+                                <% } else { %>
+                                    <div
+                                        data-userid="<%= pickems[pick].userid %>"
+                                        data-matchupid="<%= pickems[pick].idmatchup %>"
+                                        data-teamid="<%= pickems[pick].idhometeam %>"
+                                        class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> 
+                                        <%= pickems[pick].userpick === pickems[pick].home ? ' is-selected' : '' %>
+                                        <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
+                                        <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
+                                        ">
+                                            <%= pickems[pick].home %>
+                                    </div>
+                                <% } %>
                             </div>
                             <% idx++; %>
                         <% } %>
