@@ -1,4 +1,4 @@
-.jumbotron, .jumbotron-center, .jumbotron-center-compact {
+.jumbotron, .jumbotron-center, .jumbotron-center-compact, .jumbotron-center-medium {
     margin: 0 auto;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
@@ -16,7 +16,13 @@
     max-width: 1000px;
 }
 
-.jumbotron h1, .jumbotron-center h1, .jumbotron-center-compact h1 {
+.jumbotron-center-medium {
+    margin-top: 150px;
+    width: auto;
+    max-width: 75%;
+}
+
+.jumbotron h1, .jumbotron-center h1, .jumbotron-center-compact h1, .jumbotron-center-medium h1 {
     text-align: center;
 }
 
@@ -139,7 +145,7 @@
     padding: 0 5px 0 5px;
 }
 
-.pickem-week {
+.pickem-week a {
     width: 100%;
     padding: 10px 0 10px 0;
     margin-top: 15px;
@@ -473,3 +479,45 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
     text-align: center;
     line-height: 48px;
 }
+
+.pickem-weekly-table {
+    margin: 0 auto;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.pickem-weekly-table th, .pickem-weekly-table td {
+    text-align: center;
+}
+
+.pickem-weekly-table td {
+    padding: 0.5rem;
+}
+
+.pickem-weekly-table td i {
+    margin: 0 auto;
+}
+
+.pickem-weekly-table tr:nth-child(even) {
+    background: rgba(162, 162, 162, 0.65);
+}
+
+.pickem-weekly-table tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.name-header, .team-header {
+    border-right: 1px solid #000000;
+    font-size: 1rem;
+    padding: .25rem .75rem .25rem .75rem;
+}
+
+.week-control {
+    font-size: 1rem;
+    color: #FFFFFF;
+    margin: 1rem;
+}
+ .week-control.right {
+     float: right;
+     overflow: auto;
+ }

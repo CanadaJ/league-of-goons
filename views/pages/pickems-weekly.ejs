@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <head>
+        <%- include partials/styles %>
+        <title>Pick'ems by Week - League of Goons</title>
+    </head>
+    <body>
+        <div class="bg-image"></div>
+        <div class="container full-page">
+            <main>
+                <% include partials/header %>
+                <div class="jumbotron-center-medium">
+                    
+                    <h1>League of Goons Pick'ems (Week <%= weekNum %>)</h1>
+     
+                    <div class="table-container">
+                        <div class="controls-container">
+                            <% if (weekNum < 17) { %>
+                                <a class="week-control right" href="/pickems/week/<%= (parseInt(weekNum) + 1) %>">Next Week ></a>
+                            <% } %>
+                            <% if (weekNum > 2) { %>
+                                <a class="week-control" href="/pickems/week/<%= (parseInt(weekNum) - 1) %>">< Previous Week</a>
+                            <% } %>
+                        </div>
+
+                        <table class="pickem-weekly-table">
+                            <tr>
+                                <th></th>
+                                <% for (let i in matchups)  { %>
+                                    <th class="team-header"><%= matchups[i].awayName %> @ <%= matchups[i].homeName %></th>
+                                <% } %>
+                            </tr>
+                            <% for (let i in users) { %>
+                                <tr>
+                                    <th class="name-header"><%= users[i].name %></th>
+                                    <% for (let j in matchups) { %>
+                                        <% let pick = userPicks.find(p => p.iduser == users[i].userId && p.idmatchup == matchups[j].idMatchup) %>
+                                        <td>
+                                            <% if (!pick || pick.isfuture) { %>
+                                                -
+                                            <% } else if (pick && pick.wascorrect) { %>
+                                                <i class="material-icons pick-icon pickem-complete is-correct">check</i>
+                                            <% } else if (pick && !pick.wascorrect) { %>
+                                                <i class="material-icons pick-icon pickem-complete is-incorrect">close</i>
+                                            <% } %>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                            <% } %>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

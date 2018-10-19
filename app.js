@@ -54,61 +54,8 @@ var teams = [];
 var teamPicks = [];
 
 app.get('/', function (req, res) {
-    // var user = req.user;
-
-    // res.render('pages/index', {
-    //     teams: teams,
-    //     user: user ? user : null
-    // });
-
     res.redirect('/pickems');
 });
-
-// app.post(
-//     '/',
-//     form(
-//         field("teamName").trim().required(),
-//         field("pickName").trim().required()
-//     ),
-//     function(req, res) {
-//         if (!req.form.isValid) {
-//             res.redirect('/');
-//             return;
-//         }
-
-//         for (var team in teamPicks) {
-//             if (teamPicks[team].name === req.form.teamName) {
-//                 var currentPick = new Object();
-//                 currentPick.round = teamPicks[team].picks.length + 1;
-//                 currentPick.pick = req.form.pickName;
-
-//                 for (var team2 in teamPicks) {
-//                     if (teamPicks[team2].name === req.form.teamName) {
-//                         teamPicks[team2].picks.push(currentPick);
-//                     }
-//                 }
-
-//                 res.redirect('/');
-//                 return;
-//             }
-//         }
-
-//         var newTeamPick = new Object();
-
-//         newTeamPick.name = req.form.teamName;
-//         newTeamPick.picks = [];
-
-//         var currentPick = new Object();
-//         currentPick.round = 1;
-//         currentPick.pick = req.form.pickName;
-
-//         newTeamPick.picks.push(currentPick);
-
-//         teamPicks.push(newTeamPick);
-
-//         res.redirect('/');
-//         return;
-// });
 
 app.get('/admin', isLoggedIn, isAdmin, function(req, res) {
 
@@ -178,15 +125,65 @@ app.post('/admin/delete', function(req, res) {
 });
 
 app.get('/board', function(req, res) {
-
-    // var user = req.user;
-
-    // res.render('pages/board',  {
-    //     teamPicks: teamPicks,
-    //     user: user ? user : null
-    // });
-
     res.redirect('/pickems');
+});
+
+app.get('/pickems/week/:week*?', isLoggedIn, function(req, res) {
+    var weekNum = req.params['week'];
+
+    if (!weekNum || weekNum < 0) {
+        res.redirect('/pickems/week/1');
+        return;
+    }
+
+    var users = [];
+    var matchups = [];
+    var userPicks = [];
+
+    connection.query('CALL pickem_picksbyweek(?)', [weekNum], function(err, rows) {
+        if (err) throw err;
+
+        for (let i in rows[0]) {
+            users.push({
+                userId: rows[0][i].iduser,
+                name: rows[0][i].name
+            });
+        }
+
+        for (let i in rows[1]) {
+            matchups.push({
+                idMatchup: rows[1][i].idmatchup,
+                homeName: rows[1][i].homename,
+                awayName: rows[1][i].awayname
+            });
+        }
+
+        for (let idx in rows[2]) {
+            let row = rows[2];
+
+            userPicks.push({
+                iduser: row[idx].iduser,
+                name: row[idx].name,
+                idmatchup: row[idx].idmatchup,
+                wascorrect: row[idx].wascorrect,
+                isfuture: row[idx].isfuture,
+                idhometeam: row[idx].idhometeam,
+                idawayteam: row[idx].idawayteam,
+                homename: row[idx].homename,
+                awayname: row[idx].awayname
+            });
+        }
+
+        let user = req.user;
+
+        res.render('pages/pickems-weekly', {
+            users: users,
+            matchups: matchups,
+            userPicks: userPicks,
+            weekNum: weekNum,
+            user: user ? user : null
+        });
+    });
 });
 
 app.get('/pickems', isLoggedIn, function(req, res) {
