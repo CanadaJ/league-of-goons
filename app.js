@@ -171,7 +171,7 @@ app.get('/pickems/week/:week*?', isLoggedIn, function(req, res) {
                 idawayteam: row[idx].idawayteam,
                 homename: row[idx].homename,
                 awayname: row[idx].awayname,
-                hasWinner: row[idx].hasWinner
+                hasWinner: row[idx].haswinner
             });
         }
 
