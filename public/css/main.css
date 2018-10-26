@@ -498,11 +498,11 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
     margin: 0 auto;
 }
 
-.pickem-weekly-table tr:nth-child(even) {
+.pickem-weekly-table tr.pick-row:nth-child(even) {
     background: rgba(162, 162, 162, 0.65);
 }
 
-.pickem-weekly-table tr:nth-child(odd) {
+.pickem-weekly-table tr.pick-row:nth-child(odd) {
     background: rgba(255, 255, 255, 0.5);
 }
 
@@ -510,6 +510,15 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
     border-right: 1px solid #000000;
     font-size: 1rem;
     padding: .25rem .75rem .25rem .75rem;
+}
+
+.name-header.sticky {
+    position: sticky;
+    left: 0;
+}
+
+.name-header.sticky, .game-header {
+    background-color: #ECECEC;
 }
 
 .week-control {
@@ -520,4 +529,23 @@ box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0
  .week-control.right {
      float: right;
      overflow: auto;
+ }
+ 
+ .controls-container {
+    text-align: center;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+ }
+
+ .controls-container a {
+     color: #001433;
+     font-weight: bold;
+     font-size: 1.2rem;
+     padding: .5rem;
+ }
+
+ .table-container {
+     overflow-y: auto;
  }
