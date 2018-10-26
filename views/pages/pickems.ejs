@@ -23,6 +23,11 @@
                 <% include partials/header %>
                 <div class="jumbotron-center-compact">
                     <h1>League of Goons Pick'ems</h1>
+                    <div class="controls-container">
+                        <% for (let i = 1; i < 17; i++) { %>
+                            <a class="week-link" data-week="<%= i %>">Week <%= i %></a>
+                        <% } %>
+                    </div>
                     <div class="pickems-area">
                     <div class="pickem-counts">
                         <div>Correct: <span class="pickem-counts-correct"><%= pickCounts.correct %></span></div>
@@ -36,7 +41,8 @@
                                     week = pickems[pick].week; 
                                     idx = 1;
                                 %>
-                                <div class="pickem-week">
+                                <div class="top-link-container"><a class="top-link">^ Top</a></div>
+                                <div id="week<%= week %>" class="pickem-week">
                                     <a href="/pickems/week/<%= week %>">WEEK <%= week %></a>
                                 </div>
                                 <div class="pickem-homeaway">
@@ -148,6 +154,19 @@
                             }
                         }
                     });
+                });
+
+                $('.week-link').click(function() {
+                    var weekDivId = '#week' + $(this).data('week');
+                    $('.container.full-page').animate({
+                        scrollTop: ($(weekDivId).offset().top -150)
+                    }, 1000);
+                });
+
+                $('.top-link').click(function() {
+                    $('.container.full-page').animate({
+                        scrollTop: 0
+                    }, 1000);
                 });
             });
         </script>
