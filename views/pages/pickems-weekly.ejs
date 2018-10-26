@@ -32,7 +32,7 @@
                                     <% for (let j in matchups) { %>
                                         <% let pick = userPicks.find(p => p.iduser == users[i].userId && p.idmatchup == matchups[j].idMatchup) %>
                                         <td>
-                                            <% if (!pick || pick.isfuture || pick.istie) { %>
+                                            <% if (!pick || pick.isfuture || pick.istie || !pick.hasWinner) { %>
                                                 -
                                             <% } else if (pick && pick.wascorrect) { %>
                                                 <i class="material-icons pick-icon pickem-complete is-correct">check</i>
