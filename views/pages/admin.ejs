@@ -23,6 +23,11 @@
                 <% include partials/header %>
                 <div class="jumbotron-center-compact">
                     <h1>League of Goons Admin</h1>
+                    <div class="controls-container">
+                        <% for (let i = 1; i < 17; i++) { %>
+                            <a class="week-link" data-week="<%= i %>">Week <%= i %></a>
+                        <% } %>
+                    </div>
                     <div class="pickems-area">
                         <% var week = 0; %>
                         <% var mod = 1; %>
@@ -32,7 +37,7 @@
                                     week = matchups[idx].week; 
                                     mod = 1;
                                 %>
-                                <div class="pickem-week admin">
+                                <div id="week<%= week %>" class="pickem-week admin">
                                     WEEK <%= week %>
                                 </div>
                                 <div class="pickem-homeaway">
@@ -123,6 +128,13 @@
                         }
                     });
                 });
+            });
+
+            $('.week-link').click(function() {
+                var weekDivId = '#week' + $(this).data('week');
+                $('.container.full-page').animate({
+                    scrollTop: ($(weekDivId).offset().top -150)
+                }, 1000);
             });
         </script>
     </body>
