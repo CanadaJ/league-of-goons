@@ -24,8 +24,18 @@
                 <div class="jumbotron-center-compact">
                     <h1>League of Goons Pick'ems</h1>
                     <div class="controls-container">
-                        <% for (let i = 1; i <= 17; i++) { %>
-                            <a class="week-link" data-week="<%= i %>">Week <%= i %></a>
+                        <% for (let i = 1; i <= 22; i++) { %>
+                            <% if (i <= 17) { %>
+                                <a class="week-link" data-week="<%= i %>">Week <%= i %></a>
+                            <% } else if (i === 18) { %>
+                                <a class="week-link" data-week="<%= i %>">Wild Card</a>
+                            <% } else if (i === 19) { %>
+                                <a class="week-link" data-week="<%= i %>">Divisional</a>
+                            <% } else if (i === 20) { %>
+                                <a class="week-link" data-week="<%= i %>">Conference</a>
+                            <% } else if (i === 22) { %>
+                                <a class="week-link" data-week="<%= i %>">Super Bowl</a>
+                            <% } %>
                         <% } %>
                     </div>
                     <div class="pickems-area">
@@ -43,7 +53,17 @@
                                 %>
                                 <div class="top-link-container"><a class="top-link">^ Top</a></div>
                                 <div id="week<%= week %>" class="pickem-week">
+                                <% if (week <= 17) { %>
                                     <a href="/pickems/week/<%= week %>">WEEK <%= week %></a>
+                                <% } else if (week === 18) { %>
+                                    <a href="/pickems/week/<%= week %>">Wild Card</a>
+                                <% } else if (week === 19) { %>
+                                    <a href="/pickems/week/<%= week %>">Divisional</a>
+                                <% } else if (week === 20) { %>
+                                    <a href="/pickems/week/<%= week %>">Conference</a>
+                                <% } else if (week === 22) { %>
+                                    <a href="/pickems/week/<%= week %>">Super Bowl</a>
+                                <% } %>
                                 </div>
                                 <div class="pickem-homeaway">
                                     <div class="pickem-timelabel">
@@ -75,7 +95,7 @@
                                         data-matchupid="<%= pickems[pick].idmatchup %>"
                                         data-teamid="<%= pickems[pick].idawayteam %>"
                                         class="pickem-team is-locked is-selected is-winner">
-                                            <%= pickems[pick].away %>
+                                            <%= pickems[pick].away ? pickems[pick].away : 'TBD' %>
                                     </div>
                                 <% } else { %>
                                     <div
@@ -83,11 +103,11 @@
                                         data-matchupid="<%= pickems[pick].idmatchup %>"
                                         data-teamid="<%= pickems[pick].idawayteam %>"
                                         class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %>
-                                        <%= pickems[pick].userpick === pickems[pick].away ? ' is-selected' : '' %>
+                                        <%= pickems[pick].away && (pickems[pick].userpick === pickems[pick].away) ? ' is-selected' : '' %>
                                         <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
                                         <%= (!pickems[pick].idawayteam || pickems[pick].idawayteam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
                                         ">
-                                            <%= pickems[pick].away %>
+                                            <%= pickems[pick].away ? pickems[pick].away : 'TBD' %>
                                     </div>
                                 <% } %>
                                 <% if (pickems[pick].istie) { %>
@@ -96,7 +116,7 @@
                                         data-matchupid="<%= pickems[pick].idmatchup %>"
                                         data-teamid="<%= pickems[pick].idawayteam %>"
                                         class="pickem-team is-locked is-selected is-winner">
-                                            <%= pickems[pick].home %>
+                                            <%= pickems[pick].home ? pickems[pick].home : 'TBD' %>
                                     </div>
                                 <% } else { %>
                                     <div
@@ -104,11 +124,11 @@
                                         data-matchupid="<%= pickems[pick].idmatchup %>"
                                         data-teamid="<%= pickems[pick].idhometeam %>"
                                         class="pickem-team <%= pickems[pick].canupdate === 0 ? 'is-locked' : '' %> 
-                                        <%= pickems[pick].userpick === pickems[pick].home ? ' is-selected' : '' %>
+                                        <%= pickems[pick].home && (pickems[pick].userpick === pickems[pick].home) ? ' is-selected' : '' %>
                                         <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam === pickems[pick].winner) && pickems[pick].winner ? ' is-winner' : '' %> 
                                         <%= (!pickems[pick].idhometeam || pickems[pick].idhometeam !== pickems[pick].winner) && pickems[pick].winner ? ' is-loser' : '' %>
                                         ">
-                                            <%= pickems[pick].home %>
+                                            <%= pickems[pick].home ? pickems[pick].home : 'TBD' %>
                                     </div>
                                 <% } %>
                             </div>
